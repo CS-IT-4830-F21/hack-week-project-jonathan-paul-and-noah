@@ -1,0 +1,25 @@
+img {
+    height: 25px;
+    width: 25px;
+    border-radius: 50px;
+}
+
+.navbar-toggler-icon {
+    color: white;
+}
+
+.navbar {
+    background-color: rgb(39, 39, 39);
+}
+
+.nav-link {
+    color: white;
+}
+
+.nav-link:hover {
+    opacity: 0.7;
+}
+
+.login-dropdown {
+    width: 300px;
+}
