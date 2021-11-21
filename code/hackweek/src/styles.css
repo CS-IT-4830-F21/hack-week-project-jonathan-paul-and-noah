@@ -10,4 +10,17 @@
 body {
     height: 100vh;
     background-image: linear-gradient(rgb(85, 85, 85), rgb(28, 28, 28));
+    overflow: hidden;
+}
+
+code[class*="language-"],
+pre[class*="language-"] {
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	font-size: 0.7rem; /* 1em */
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
 }

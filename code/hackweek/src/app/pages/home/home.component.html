@@ -1,1 +1,28 @@
-<p>home works!</p>
+<div class="container-fluid d-flex">
+    <div class="w-25 side-bar">sidebar</div>
+    <div class="w-75 feed">
+        <h2 class="feed-title">Feed</h2>
+        <div class="post">
+            <div class="user-info">
+                <div class="pfp-container">
+                    <img src={{sampleImage}} alt="Profile Picture" class="pfp">
+                </div>
+                <div class="name-date-container">
+                    <span class="post-user">{{sampleUsername}}</span>
+                    <span class="post-time">{{sampleTime}}</span>
+                </div>
+            </div>
+            <div class="title-desc">
+                <h3 class="post-title">{{sampleTitle}}</h3>
+                <p class="description">{{sampleDescription}}</p>
+            </div>
+
+            
+            <div class="code">
+                <div class="line-numbers">
+                    <pre><code class="language-python">{{sampleCode}}</code></pre>
+                </div>
+            </div>     
+        </div>
+    </div>
+</div>

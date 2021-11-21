@@ -4,11 +4,15 @@ import { RouterModule } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
 import { NavbarComponent } from './components/navbar/navbar.component';
+
 import { HomeComponent } from './pages/home/home.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { CreatePostComponent } from './pages/create-post/create-post.component';
+
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -30,7 +34,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
       { path: '**', component: HomeComponent}
     ]),
     NgbModule,
-  
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
