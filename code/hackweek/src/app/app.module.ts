@@ -13,6 +13,7 @@ import { CreatePostComponent } from './pages/create-post/create-post.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CreateAccountComponent } from './pages/create-account/create-account.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     NavbarComponent,
     HomeComponent,
     ProfileComponent,
-    CreatePostComponent
+    CreatePostComponent,
+    CreateAccountComponent
   ],
   imports: [
     BrowserModule,
