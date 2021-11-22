@@ -26,13 +26,6 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule.forChild([
-      { path: '', component: HomeComponent},
-      { path: 'home', component: HomeComponent},
-      { path: 'profile', component: ProfileComponent},
-      { path: 'post', component: CreatePostComponent},
-      { path: '**', component: HomeComponent}
-    ]),
     NgbModule,
     ReactiveFormsModule
   ],
