@@ -12,7 +12,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { CreatePostComponent } from './pages/create-post/create-post.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -27,6 +27,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     NgbModule,
+    FormsModule,
     ReactiveFormsModule
   ],
   providers: [],
