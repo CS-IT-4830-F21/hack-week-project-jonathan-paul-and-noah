@@ -1,5 +1,7 @@
 package hackweek.mizzou.jpnn.backend.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,17 +9,25 @@ import org.springframework.stereotype.Service;
 
 import hackweek.mizzou.jpnn.backend.dao.PostDAO;
 import hackweek.mizzou.jpnn.backend.model.Post;
+import hackweek.mizzou.jpnn.backend.repository.UserRepository;
 
 @Service
 public class PostServiceImpl implements PostService
 {
 	
 	@Autowired
-	PostDAO postDAO;
-
+	private PostDAO postDAO;
+		
+	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	
 	@Override
 	public boolean savePost(Post post) 
 	{
+		if(post.getId() < 1)
+		{
+			post.setTimestamp(formatter.format(new Date()));			
+		}
+		
 		return postDAO.savePost(post);
 	}
 

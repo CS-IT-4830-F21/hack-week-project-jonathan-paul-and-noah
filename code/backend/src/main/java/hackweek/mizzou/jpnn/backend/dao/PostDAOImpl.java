@@ -3,6 +3,7 @@ package hackweek.mizzou.jpnn.backend.dao;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -22,16 +23,16 @@ public class PostDAOImpl implements PostDAO
 		if (post.getId() > 0) 
 		{
 			// update
-			String sql = "UPDATE posts SET title=?, description=?, language=?, code=? WHERE id=?";
+			String sql = "UPDATE posts SET title=?, description=?, language=?, code=?, timestamp=? WHERE id=?";
 			rows = jdbcTemplate.update(sql, post.getTitle(), post.getDescription(), post.getLanguage(), post.getCode(),
-					post.getId());
+					post.getTimestamp(), post.getId());
 		}
 		else
 		{
 			// insert
-			String sql = "INSERT INTO posts (title, description, language, code) VALUES (?, ?, ?, ?)";
-			rows = jdbcTemplate.update(sql, post.getTitle(), post.getDescription(), post.getLanguage(),
-					post.getCode());
+			String sql = "INSERT INTO posts (authorId, title, description, language, code, timestamp) VALUES (?, ?, ?, ?, ?, ?)";
+			rows = jdbcTemplate.update(sql, post.getAuthorId(), post.getTitle(), post.getDescription(), post.getLanguage(),
+					post.getCode(), post.getTimestamp());
 		}
 		
 		if(rows > 0)
@@ -60,7 +61,15 @@ public class PostDAOImpl implements PostDAO
 	public Post getPost(int id) 
 	{
 		String sql = "SELECT * FROM posts WHERE id=" + id;
-		Post post = jdbcTemplate.queryForObject(sql, new PostMapper());
+		Post post;
+		try
+		{
+			post = jdbcTemplate.queryForObject(sql, new PostMapper());
+		}
+		catch(EmptyResultDataAccessException e)
+		{
+			return null;
+		}
 		
 		return post;
 	}
