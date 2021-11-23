@@ -14,7 +14,7 @@ public class PostMapper implements RowMapper<Post>
 		post.setId(rs.getInt("id"));
 		post.setTitle(rs.getString("title"));
 		post.setDescription(rs.getString("description"));
-		post.setLanuage(rs.getString("language"));
+		post.setLanguage(rs.getString("language"));
 		post.setCode(rs.getString("code"));
 		
 		return post;

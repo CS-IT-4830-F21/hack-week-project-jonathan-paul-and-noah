@@ -8,6 +8,6 @@ public class Post
 	private int id;
 	private String title;
 	private String description;
-	private String lanuage;
+	private String language;
 	private String code;
 }
