@@ -12,10 +12,6 @@ form {
     border-radius: 5px;
 }
 
-.uploadText {
-    line-height: 20px;
-}
-
 .uploadText:hover {
     cursor: pointer;
 }
@@ -28,4 +24,19 @@ form {
 
 #pfpPreview {
     display: block;
+}
+
+#close {
+    color: rgb(169, 0, 0);
+    cursor: pointer;
+}
+
+img {
+    box-shadow: 0 0 15px rgba(0,0,0,0.4);
+    border: 1px solid white;
+    border-radius: 100%;
+    object-fit: cover;
+    object-position: center center;
+    height: 100px;
+    width: 100px;
 }

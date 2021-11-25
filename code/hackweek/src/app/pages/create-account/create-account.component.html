@@ -22,14 +22,19 @@
         </div>
     </div>
     <div class="form-row">
-        <div class="form-group">
-            <label for="profile-picture"><p class="btn btn-dark uploadText">Profile Picture<span class="material-icons">
-                file_upload
-                </span></p></label>
-            <input #profilePic type="file" (change)="selectFile($event)" class="form-control-file" style="display: none;" accept="image/png, image/jpg, image/jpeg" id="profile-picture">
-            <span *ngIf="url" id="close" class="material-icons" (click)="clearFile()">close</span>
-            <img id="pfpPreview" [src]="url" height="100" *ngIf="url">
+        <div class="col-md-6">
+          
+          <label for="profile-picture"><p class="btn btn-dark uploadText">Profile Picture<span class="material-icons">
+              file_upload
+              </span></p></label>
+          <input #profilePic type="file" (change)="selectFile($event)" class="form-control-file pic-input" style="display: none;" accept="image/png, image/jpg, image/jpeg" id="profile-picture">
+          <span *ngIf="url" id="close" class="material-icons" (click)="clearFile()">close</span>
+          <img id="pfpPreview" [src]="url" *ngIf="url">
+        </div>
+        <div class="col-md-6">
+          
+          <button type="submit" class="btn btn-dark submit">Create Account</button>
         </div>
     </div>
-    <button type="submit" class="btn btn-dark">Create Account</button>
+    
   </form>
