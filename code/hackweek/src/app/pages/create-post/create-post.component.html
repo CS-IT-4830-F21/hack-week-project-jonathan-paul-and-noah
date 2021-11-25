@@ -1,1 +1,79 @@
-<p>create-post works!</p>
+<section class="content">
+  <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
+    <div class="mb-4">
+      <label for="Title" class="form-label">Title</label>
+      <input
+        type="textarea"
+        class="form-control"
+        id="Title"
+        formControlName="Title"
+      />
+    </div>
+    <div class="mb-4">
+      <label for="Description" class="form-label">Description</label>
+      <input
+        type="textarea"
+        class="form-control"
+        id="Description"
+        formControlName="Description"
+      />
+    </div>
+
+    <div class="mb-4">
+      <label for="code" class="form-label">Code</label>
+      <textarea
+        class="form-control textarea"
+        id="code"
+        rows="5"
+        formControlName="code"
+      ></textarea>
+    </div>
+    <!-- choose dropdown -->
+    <div>
+      <select
+        class="custom-select my-1 mr-sm-2"
+        id="inlineFormCustomSelectPref"
+        name="language"
+        formControlName="language"
+      >
+        <option selected value="None" >Choose Language...</option>
+        <option value="Bash">Bash</option>
+        <option value="CSS">CSS</option>
+        <option value="C#">C#</option>
+        <option value="Go">Go</option>
+        <option value="HTML">HTML</option>
+        <option value="Java">Java</option>
+        <option value="Javascript">Javascript</option>
+        <option value="JSON">JSON</option>
+        <option value=".NET">.NET</option>
+        <option value="Objective-C">Objective-C</option>
+        <option value="PHP">PHP</option>
+        <option value="Python">Python</option>
+        <option value="Ruby">Ruby</option>
+        <option value="SQL">SQL</option>
+        <option value="XML">XML</option>
+        <option value="YAML">YAML</option>
+      </select>
+    </div>
+
+    <div class="mb-4">
+      <label for="codeLink" class="form-label">Running Code Link</label>
+      <input
+        type="textarea"
+        class="form-control"
+        id="codeLink"
+        formControlName="codeLink"
+      />
+    </div>
+    <div class="mb-4">
+      <label for="formFile" class="form-label">Import File</label>
+      <input
+        class="form-control"
+        type="file"
+        id="formFile"
+        formControlName="file"
+      />
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</section>
