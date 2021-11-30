@@ -8,7 +8,7 @@ import { User } from './auth.service';
 })
 export class PostServiceService {
   posts: Post[];
-  endpoint: string = '***path to api***';
+  endpoint: string = 'localhost:8080';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
 
   constructor(private http: HttpClient, public router: Router) {
@@ -48,13 +48,11 @@ export class Post {
   description: string;
   code: string;
   language: string;
-  link: string;
 
   constructor(title: string, description: string, code: string, language: string, link: string){
     this.title = title;
     this.description = description;
     this.code = code;
     this.language = language;
-    this.link = link;
   }
 }

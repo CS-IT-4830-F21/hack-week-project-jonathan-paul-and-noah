@@ -8,11 +8,22 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
-  endpoint: string = '***path to api***';
-  headers = new HttpHeaders().set('Content-Type', 'application/json');
+  endpoint: string = '/api'; //'http://18.224.23.71';
+  headers = new HttpHeaders().set('Content-Type', 'application/json').set('Access-Control-Allow-Origin', 'true');
+  
+
   currentUser: User;
 
-  constructor(private http: HttpClient, public router: Router) { this.currentUser = new User("", "", "") }
+  constructor(private http: HttpClient, public router: Router) { 
+    this.currentUser = new User("", "", "")
+    this.headers.append('Content-Type', 'application/json');
+    this.headers.append('Accept', 'application/json');
+    this.headers.append('Access-Control-Allow-Origin', 'http://localhost:8080');
+    this.headers.append('Access-Control-Allow-Credentials', 'true');
+    this.headers.append('GET', 'POST');
+    
+    this.signIn("newUser", "password");
+  }
 
   signUp(user: User) {
     let api = '${this.endpoint}/users/createUser';
@@ -29,20 +40,13 @@ export class AuthService {
   }
 
   signIn(username: string, password: string) {
-    // first need to validate username & password?
-    // ******************************************
-    this.currentUser = this.getUserProfile(username) as unknown as User;
-    if (this.currentUser == null) {
-      // user does not exist
-
-    }
-    else {
-      this.http.post(`${this.endpoint}/authentication/generateToken`, username)
-        .subscribe((res:any) => {
-          localStorage.setItem('access_token', res.token);
-        })
+    this.http.post(`${this.endpoint}/authentication/generateToken`, '{"username": ${username}, "password": ${password}}')
+      .subscribe((res:any) => { 
+        console.log("token = " + res.token);
+        localStorage.setItem('access_token', res.token);
         localStorage.setItem("username", username);
-    }
+        this.currentUser = this.getUserProfile(username) as unknown as User;
+      }) 
   }
 
   isSignedIn(): boolean {
@@ -60,7 +64,7 @@ export class AuthService {
   }
 
   getUserProfile(name: String) {
-    let api = `${this.endpoint}/users/getUserByName/${name}`;
+    let api = `${this.endpoint}/users/getUserByName?username=${name}`;
     let data = null;
     this.http.get(api, { headers: this.headers }).subscribe((res) => {
         if ((res as HttpResponse<User>).status == HttpStatusCode.NotFound){
