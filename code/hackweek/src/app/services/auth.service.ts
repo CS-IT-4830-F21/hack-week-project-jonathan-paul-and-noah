@@ -8,20 +8,13 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
-  endpoint: string = '/api'; //'http://18.224.23.71';
+  endpoint: string = 'http://18.224.23.71:8080';
   headers = new HttpHeaders().set('Content-Type', 'application/json').set('Access-Control-Allow-Origin', 'true');
-  
-
   currentUser: User;
 
-  constructor(private http: HttpClient, public router: Router) { 
+  constructor(private http: HttpClient, public router: Router) 
+  { 
     this.currentUser = new User("", "", "")
-    this.headers.append('Content-Type', 'application/json');
-    this.headers.append('Accept', 'application/json');
-    this.headers.append('Access-Control-Allow-Origin', 'http://localhost:8080');
-    this.headers.append('Access-Control-Allow-Credentials', 'true');
-    this.headers.append('GET', 'POST');
-    
     this.signIn("newUser", "password");
   }
 
@@ -39,13 +32,15 @@ export class AuthService {
     }); //pipe(catchError(this.handleError));
   }
 
-  signIn(username: string, password: string) {
-    this.http.post(`${this.endpoint}/authentication/generateToken`, '{"username": ${username}, "password": ${password}}')
-      .subscribe((res:any) => { 
+  signIn(user: string, pass: string) {
+    this.http.post(`${this.endpoint}/authentication/generateToken`, {username: user, password: pass})
+      .subscribe((res:any) => 
+      { 
         console.log("token = " + res.token);
         localStorage.setItem('access_token', res.token);
-        localStorage.setItem("username", username);
-        this.currentUser = this.getUserProfile(username) as unknown as User;
+        localStorage.setItem("username", user);
+        this.getUserProfile(user)
+        this.currentUser = this.getUserProfile(user) as unknown as User;
       }) 
   }
 
@@ -58,12 +53,14 @@ export class AuthService {
     return false;
   }
 
-  doSignOut() {
+  doSignOut() 
+  {
     localStorage.removeItem("access_token");
     localStorage.removeItem("username");
   }
 
-  getUserProfile(name: String) {
+  getUserProfile(name: String) 
+  {
     let api = `${this.endpoint}/users/getUserByName?username=${name}`;
     let data = null;
     this.http.get(api, { headers: this.headers }).subscribe((res) => {
@@ -74,6 +71,11 @@ export class AuthService {
       });
       return data;
       // catchError(this.handleError)
+  }
+
+  getToken() 
+  {
+    return localStorage.getItem('access_token');
   }
 
   handleError(error: HttpErrorResponse) {
