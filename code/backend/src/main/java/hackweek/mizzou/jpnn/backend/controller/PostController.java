@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,6 +36,7 @@ public class PostController
 	@Autowired
 	private UserController userController;
 	
+	@CrossOrigin
     @GetMapping(value = "/getPosts")
     public List<Post> getPosts() 
     {
@@ -43,6 +45,7 @@ public class PostController
     	return posts;
     }
     
+    @CrossOrigin
     @GetMapping(value = "/getPost")
     public ResponseEntity<Post> getPost(@RequestParam int id)
     {
@@ -56,6 +59,7 @@ public class PostController
     	return ResponseEntity.ok(post);
     }
     
+    @CrossOrigin
     @DeleteMapping(value = "/deletePost")
     public boolean deletePost(@RequestParam int id)
     {
@@ -64,6 +68,7 @@ public class PostController
     	return deleted;
     }
     
+    @CrossOrigin
     @PostMapping(value = "savePost")
     public boolean savePost(@RequestBody Post post, @RequestHeader (name="Authorization") String token)
     {

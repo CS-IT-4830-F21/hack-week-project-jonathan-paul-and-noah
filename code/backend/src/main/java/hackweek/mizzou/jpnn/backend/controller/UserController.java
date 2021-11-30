@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +31,7 @@ public class UserController
 	@Autowired
 	private JwtUserDetailsService userDetailsService;
 	
+	@CrossOrigin
 	@RequestMapping(value = "/createUser", method = RequestMethod.POST)
 	public ResponseEntity<?> saveUser(@RequestBody UserDao user) throws Exception 
 	{
@@ -45,7 +47,8 @@ public class UserController
 		
 		return new ResponseEntity(null, HttpStatus.CONFLICT);
 	}
-	
+
+	@CrossOrigin
     @GetMapping(value = "/getUserByName")
     public ResponseEntity<User> getUserByName(@RequestParam String username) 
     {
@@ -60,6 +63,7 @@ public class UserController
     	return ResponseEntity.ok(u);
     }
     
+	@CrossOrigin
     @GetMapping(value = "/getUserById")
     public ResponseEntity<User> getUserByName(@RequestParam int id) 
     {
