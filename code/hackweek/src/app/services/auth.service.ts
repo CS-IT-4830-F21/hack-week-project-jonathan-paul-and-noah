@@ -10,37 +10,40 @@ import { Router } from '@angular/router';
 export class AuthService {
   endpoint: string = 'http://18.224.23.71:8080';
   headers = new HttpHeaders().set('Content-Type', 'application/json').set('Access-Control-Allow-Origin', 'true');
-  currentUser: User;
+  currentUser: User | null;
 
   constructor(private http: HttpClient, public router: Router) 
   { 
-    this.currentUser = new User("", "", "")
-    this.signIn("newUser", "password");
+    this.currentUser = new User(0, "", "", "")
+    //this.signIn("newUser", "password");
+    //this.signUp("noahF2", "12345", "user@gmail.com", "This is my bio.");
   }
-
-  signUp(user: User) {
-    let api = '${this.endpoint}/users/createUser';
-    this.http.post(api, user).subscribe((res) => {
-      if ((res as HttpResponse<User>).status == HttpStatusCode.Conflict){
-        // username already exists
-        return // ...
-      }
-      else {
-        // user has been created
-        return // ...
-      }
-    }); //pipe(catchError(this.handleError));
+  
+  signUp(username: string, password: string, email: string, bio: string) {
+    let api = `${this.endpoint}/users/createUser`;
+    let jsonObj = {username: username, password: password, email: email, bio: bio};
+    
+    try {
+      this.http.post(api, jsonObj).subscribe((res) => {
+        let toggle = this.signIn(username, password);
+        return toggle;
+      }); 
+    }
+    catch (error){
+      return false;
+    }
+    return false;
   }
-
+// id 12
   signIn(user: string, pass: string) {
     this.http.post(`${this.endpoint}/authentication/generateToken`, {username: user, password: pass})
-      .subscribe((res:any) => 
+      .subscribe((res:any) =>
       { 
         console.log("token = " + res.token);
         localStorage.setItem('access_token', res.token);
         localStorage.setItem("username", user);
         this.getUserProfile(user)
-        this.currentUser = this.getUserProfile(user) as unknown as User;
+        return true;
       }) 
   }
 
@@ -57,19 +60,20 @@ export class AuthService {
   {
     localStorage.removeItem("access_token");
     localStorage.removeItem("username");
+    this.currentUser = null;
   }
 
-  getUserProfile(name: String) 
+  async getUserProfile(name: String) 
   {
     let api = `${this.endpoint}/users/getUserByName?username=${name}`;
     let data = null;
-    this.http.get(api, { headers: this.headers }).subscribe((res) => {
-        if ((res as HttpResponse<User>).status == HttpStatusCode.NotFound){
-          data = null;
-        }
-        data = (res as HttpResponse<User>).body;
+    this.headers.set("Authorization", localStorage.getItem("access_token") as string);
+    this.http.get(api, { headers: this.headers }).subscribe(async (res) => {
+      this.currentUser = new User((res as User).id, (res as User).username, (res as User).email, (res as User).bio);
+      console.log(this.currentUser);
+      return true;
       });
-      return data;
+      return false;
       // catchError(this.handleError)
   }
 
@@ -92,15 +96,15 @@ export class AuthService {
 }
 
 export class User {
-  _id: String;
-  username: String;
-  email: String;
-  password: String;
+  id: number;
+  username: string;
+  email: string;
+  bio: string;
 
-  constructor(username: String, email: String, password: String) {
-    this._id = "not set";
+  constructor(id: number, username: string, email: string, bio: string) {
+    this.id = id;
     this.username = username;
     this.email = email;
-    this.password = password;
+    this.bio = bio;
   }
 }
