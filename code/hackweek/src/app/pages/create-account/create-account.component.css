@@ -1,0 +1,42 @@
+.title {
+    text-align: center;
+    margin: 20px;
+    color: white;
+}
+
+form {
+    width: 80%;
+    margin: 5vh auto 10vh;
+    padding: 30px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.uploadText:hover {
+    cursor: pointer;
+}
+
+.uploadText span {
+    line-height: 20px;
+    display: inline;
+    vertical-align: middle;
+}
+
+#pfpPreview {
+    display: block;
+}
+
+#close {
+    color: rgb(169, 0, 0);
+    cursor: pointer;
+}
+
+img {
+    box-shadow: 0 0 15px rgba(0,0,0,0.4);
+    border: 1px solid white;
+    border-radius: 100%;
+    object-fit: cover;
+    object-position: center center;
+    height: 100px;
+    width: 100px;
+}

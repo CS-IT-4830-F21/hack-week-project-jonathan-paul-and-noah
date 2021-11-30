@@ -1,3 +1,4 @@
+<h1 class="title">Make a Post!</h1>
 <section class="content">
   <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
     <div class="mb-4">
@@ -7,6 +8,7 @@
         class="form-control"
         id="Title"
         formControlName="Title"
+        placeholder="Title"
       />
     </div>
     <div class="mb-4">
@@ -16,6 +18,7 @@
         class="form-control"
         id="Description"
         formControlName="Description"
+        placeholder="Description"
       />
     </div>
 
@@ -26,10 +29,12 @@
         id="code"
         rows="5"
         formControlName="code"
+        placeholder="Paste your code here!"
       ></textarea>
     </div>
     <!-- choose dropdown -->
     <div>
+      <label for="inlineFormCustomSelectPref" class="form-label">Language</label>
       <select
         class="custom-select my-1 mr-sm-2"
         id="inlineFormCustomSelectPref"
@@ -57,18 +62,18 @@
     </div>
 
     <div class="mb-4">
-      <label for="codeLink" class="form-label">Running Code Link</label>
+      <label for="codeLink" class="form-label">Link to Running Code</label>
       <input
         type="textarea"
         class="form-control"
         id="codeLink"
         formControlName="codeLink"
+        placeholder="Link"
       />
     </div>
     <div class="mb-4">
-      <label for="formFile" class="form-label">Import File</label>
+      <label for="formFile" class="form-label">Picture</label>
       <input
-        class="form-control"
         type="file"
         id="formFile"
         formControlName="file"
