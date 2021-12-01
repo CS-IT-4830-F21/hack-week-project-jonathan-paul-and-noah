@@ -16,7 +16,6 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CreateAccountComponent } from './pages/create-account/create-account.component';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { AuthService } from './services/auth.service';
 import { PostServiceService } from './services/post-service.service';
 
@@ -37,13 +36,7 @@ import { PostServiceService } from './services/post-service.service';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [{
-    provide: HTTP_INTERCEPTORS, 
-    useClass: AuthInterceptorService, 
-    multi: true},
-    AuthService,
-    PostServiceService
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
