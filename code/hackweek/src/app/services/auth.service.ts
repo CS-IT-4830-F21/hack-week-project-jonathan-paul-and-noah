@@ -27,16 +27,10 @@ export class AuthService {
     let api = `${this.endpoint}/users/createUser`;
     let jsonObj = {username: username, password: password, email: email, bio: bio};
     
-    try {
       this.http.post(api, jsonObj).subscribe((res) => {
         let toggle = this.signIn(username, password);
         return toggle;
       }); 
-    }
-    catch (error){
-      return false;
-    }
-    return false;
   }
   
   signIn(user: string, pass: string) {

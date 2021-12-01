@@ -22,6 +22,7 @@ export class NavbarComponent implements OnInit {
     this.postModel = postModel;
     this.renderer = renderer;
     this.router = router;
+    this.postModel.getPosts();
   }
 
   @ViewChild('login', {static: true}) login!: ElementRef<HTMLElement>;
@@ -45,10 +46,12 @@ export class NavbarComponent implements OnInit {
   async onSubmit() {
     let username= this.signInForm.value['username'];
     let password = this.signInForm.value['password'];
-    this.userModel.signIn(username, password);
+    let toggle = await this.userModel.signIn(username, password);
     this.router.navigate(['/home']);
     this.signInForm.reset();
     this.loggedIn = true;
+    
+    // if (localStorage.getItem('access_token') != null && localStorage.getItem('username') == username) this.loggedIn = true;
     // if (this.userModel.signIn(username, password) == true){
     //   console.log("777");
     //   this.signInForm.value['username'] = this.signInForm.value['password'] = "";
