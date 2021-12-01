@@ -23,3 +23,7 @@ img {
 .login-dropdown {
     width: 300px;
 }
+
+.logout {
+    display: none;
+}

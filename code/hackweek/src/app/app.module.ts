@@ -17,6 +17,8 @@ import { CreateAccountComponent } from './pages/create-account/create-account.co
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
+import { AuthService } from './services/auth.service';
+import { PostServiceService } from './services/post-service.service';
 
 @NgModule({
   declarations: [
@@ -38,8 +40,10 @@ import { AuthInterceptorService } from './services/auth-interceptor.service';
   providers: [{
     provide: HTTP_INTERCEPTORS, 
     useClass: AuthInterceptorService, 
-    multi: true
-  }],
+    multi: true},
+    AuthService,
+    PostServiceService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

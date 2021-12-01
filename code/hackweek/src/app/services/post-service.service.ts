@@ -1,5 +1,5 @@
 import { HttpHeaders, HttpClient, HttpResponse, HttpStatusCode } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 //import { time } from 'console';
 import { User } from './auth.service';
@@ -7,17 +7,23 @@ import { User } from './auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class PostServiceService {
+export class PostServiceService implements OnInit {
   posts: Post[];
   endpoint: string = 'http://18.224.23.71:8080';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
 
   constructor(private http: HttpClient, public router: Router) {
     this.posts = [];
-    //this.getPost(8);
+    //console.log(this.getPost(8));
     //this.getPosts();
     //console.log(this.deletePost(10));
     //this.savePost("Post 00", "C#", "test test test", "console.log('test')");
+  }
+
+  ngOnInit(): void {
+    console.log("testing testing");
+    this.getPosts();
+    console.log(this.posts);
   }
 
   getPosts(){
@@ -35,10 +41,13 @@ export class PostServiceService {
     catch (error) {
       return false;
     }
+    finally {
     return false;
+    }
   }
 
   parsePost(post: any){
+    console.log(post);
     this.posts.push(new Post(post.authorId, post.code, post.description, post.id, post.language, post.timestamp, post.title));
   }
 

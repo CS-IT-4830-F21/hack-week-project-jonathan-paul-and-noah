@@ -1,13 +1,13 @@
 <h1 class="title">Make a Post!</h1>
 <section class="content">
-  <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="createPostForm" (ngSubmit)="onSubmit()">
     <div class="mb-4">
       <label for="Title" class="form-label">Title</label>
       <input
         type="textarea"
         class="form-control"
         id="Title"
-        formControlName="Title"
+        formControlName="title"
         placeholder="Title"
       />
     </div>
@@ -17,7 +17,7 @@
         type="textarea"
         class="form-control"
         id="Description"
-        formControlName="Description"
+        formControlName="description"
         placeholder="Description"
       />
     </div>
@@ -29,7 +29,7 @@
         id="code"
         rows="5"
         formControlName="code"
-        placeholder="Paste your code here!"
+        placeholder="Paste your code here"
       ></textarea>
     </div>
     <!-- choose dropdown -->
@@ -41,7 +41,7 @@
         name="language"
         formControlName="language"
       >
-        <option selected value="None" >Choose Language...</option>
+        <option selected value="None" disabled>Choose Language</option>
         <option value="Bash">Bash</option>
         <option value="CSS">CSS</option>
         <option value="C#">C#</option>
@@ -61,7 +61,7 @@
       </select>
     </div>
 
-    <div class="mb-4">
+    <!-- <div class="mb-4">
       <label for="codeLink" class="form-label">Link to Running Code</label>
       <input
         type="textarea"
@@ -78,7 +78,7 @@
         id="formFile"
         formControlName="file"
       />
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    </div> -->
+    <button type="submit" class="btn btn-primary" *ngIf="createPostForm.valid">Submit</button>
   </form>
 </section>

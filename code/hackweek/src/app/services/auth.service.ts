@@ -14,7 +14,11 @@ export class AuthService {
 
   constructor(private http: HttpClient, public router: Router) 
   { 
-    this.currentUser = new User(0, "", "", "")
+    this.currentUser = null;
+    let token = localStorage.getItem("access_token");
+    if (token != null){
+      this.getUserProfile(localStorage.getItem("username") as string);
+    }
     //this.signIn("newUser", "password");
     //this.signUp("noahF2", "12345", "user@gmail.com", "This is my bio.");
   }
@@ -34,7 +38,7 @@ export class AuthService {
     }
     return false;
   }
-// id 12
+  
   signIn(user: string, pass: string) {
     this.http.post(`${this.endpoint}/authentication/generateToken`, {username: user, password: pass})
       .subscribe((res:any) =>
@@ -66,10 +70,9 @@ export class AuthService {
   async getUserProfile(name: String) 
   {
     let api = `${this.endpoint}/users/getUserByName?username=${name}`;
-    let data = null;
     this.headers.set("Authorization", localStorage.getItem("access_token") as string);
     this.http.get(api, { headers: this.headers }).subscribe(async (res) => {
-      this.currentUser = new User((res as User).id, (res as User).username, (res as User).email, (res as User).bio);
+      this.currentUser = new User((res as any).id, (res as any).username, (res as any).email, (res as any).bio);
       console.log(this.currentUser);
       return true;
       });
