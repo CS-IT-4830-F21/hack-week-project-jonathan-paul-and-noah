@@ -15,6 +15,8 @@ export class CreateAccountComponent implements OnInit {
 	createAccountForm: FormGroup = new FormGroup({key: new FormControl()});
 	renderer: Renderer2;
 	router: Router;
+	emailInvalid: boolean = false;
+	match: boolean = true;
   
   constructor(private render: Renderer2, private route: Router, userModel: AuthService, postModel: PostServiceService) { 
 	this.userModel = userModel;
@@ -30,12 +32,36 @@ export class CreateAccountComponent implements OnInit {
 
   initializeForm(): void {
     this.createAccountForm = new FormGroup({
-		'username': new FormControl(null, [Validators.required]),
-		'password': new FormControl(null, [Validators.required]),
+		'username': new FormControl(null, [Validators.required, Validators.minLength(6), Validators.maxLength(20)]),
+		'password': new FormControl(null, [Validators.required, Validators.pattern('(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}')]),
 		'confirm': new FormControl(null, [Validators.required]),
 		'email': new FormControl(null, [Validators.required, Validators.email]),
 		'bio': new FormControl(null, [Validators.required])
     });
+  }
+
+  emailValid(){
+	  if (this.createAccountForm.get('email')?.status == "INVALID"){
+		this.emailInvalid = true;
+	  } else {
+		  this.emailInvalid = false;
+	  }
+  }
+
+  passwordMatch() {
+	  let password = this.createAccountForm.get('password')?.value;
+	  let confirm = this.createAccountForm.get('confirm')?.value;
+
+	  if (password != '' && confirm != ''){
+		  this.match = true;
+		  if (password == confirm){
+			this.match = true;
+		  } else {
+			  this.match = false;
+		  }
+	  } else {
+		  this.match = true
+	  }
   }
 
   onSubmit() {
