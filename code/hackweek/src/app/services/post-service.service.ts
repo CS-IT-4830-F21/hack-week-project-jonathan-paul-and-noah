@@ -7,7 +7,7 @@ import { User } from './auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class PostServiceService implements OnInit {
+export class PostServiceService {
   posts: Post[];
   endpoint: string = 'http://18.224.23.71:8080';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
@@ -20,16 +20,9 @@ export class PostServiceService implements OnInit {
     //this.savePost("Post 00", "C#", "test test test", "console.log('test')");
   }
 
-  ngOnInit(): void {
-    console.log("testing testing");
-    this.getPosts();
-    console.log(this.posts);
-  }
-
   getPosts(){
     let api = `${this.endpoint}/posts/getPosts`;
     this.headers.set("Authorization", localStorage.getItem("access_token") as string);
-    try {
       this.http.get(api, { headers: this.headers }).subscribe((res) => {
         for (let i = 0; i < (res as any).length; i++){
           this.parsePost((res as any)[i]);
@@ -37,13 +30,6 @@ export class PostServiceService implements OnInit {
         console.log(this.posts);
         return true;
         });
-    }
-    catch (error) {
-      return false;
-    }
-    finally {
-    return false;
-    }
   }
 
   parsePost(post: any){
@@ -51,25 +37,19 @@ export class PostServiceService implements OnInit {
     this.posts.push(new Post(post.authorId, post.code, post.description, post.id, post.language, post.timestamp, post.title));
   }
 
-  async getPost(id: number){
+  getPost(id: number){
     let api = `${this.endpoint}/posts/getPost?id=${id}`;
     this.headers.set("Authorization", localStorage.getItem("access_token") as string);
-    try {
       this.http.get(api, { headers: this.headers }).subscribe((res) => {
         let data = new Post((res as Post).authorId, (res as Post).code, (res as Post).description, (res as Post).id, (res as Post).language, (res as Post).timestamp, (res as Post).title);
         return data;
       });
-    }
-    catch (error){
-      return null;
-    }
-    return null;
+    
   }
 
   deletePost(id: number){
     let api = `${this.endpoint}/posts/deletePost?id=${id}`;
     this.headers.set("Authorization", localStorage.getItem("access_token") as string);
-    try {
       this.http.delete(api, { headers: this.headers }).subscribe((res) => {
         if (res == true){
           return true;
@@ -78,11 +58,7 @@ export class PostServiceService implements OnInit {
           return false;
         }
       });
-    }
-    catch (error) {
-      return false;
-    }
-    return false;
+
   }
 
   savePost(title: string, language: string, description: string, code: string){
