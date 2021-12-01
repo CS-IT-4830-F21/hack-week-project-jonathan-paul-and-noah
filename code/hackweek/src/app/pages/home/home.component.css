@@ -27,7 +27,7 @@
 }
 
 .post {
-    margin: 0 auto;
+    margin: 0 auto 10px;
     position: relative;
     background-color: lightgrey;
     width: 80%;

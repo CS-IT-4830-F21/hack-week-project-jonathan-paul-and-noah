@@ -18,6 +18,7 @@ import { CreateAccountComponent } from './pages/create-account/create-account.co
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
 import { PostServiceService } from './services/post-service.service';
+import { HighlightService } from './highlight.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import { PostServiceService } from './services/post-service.service';
     HomeComponent,
     ProfileComponent,
     CreatePostComponent,
-    CreateAccountComponent
+    CreateAccountComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,7 +37,7 @@ import { PostServiceService } from './services/post-service.service';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [HighlightService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
