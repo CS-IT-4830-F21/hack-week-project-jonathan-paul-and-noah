@@ -13,8 +13,8 @@ export class CreateAccountComponent {
 
   constructor() { 
 	this.createAccount = new FormGroup({
-		'username': new FormControl(null, Validators.required),
-		'email': new FormControl(null, Validators.required),
+		'username': new FormControl(null, [Validators.required, Validators.minLength(6), Validators.maxLength(16)]),
+		'email': new FormControl(null, [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]),
 		'password': new FormControl('', Validators.required),
 		'confirm_password': new FormControl('', Validators.required),
 		'picture': new FormControl(null)
@@ -26,6 +26,7 @@ export class CreateAccountComponent {
   	url: any; 
 	msg = "";	
 	match: boolean = true;
+	invalid: boolean = false;
 
 	selectFile(event: any) { 
 		if(!event.target.files[0] || event.target.files[0].length == 0) {
@@ -47,25 +48,30 @@ export class CreateAccountComponent {
 			this.msg = "";
 			this.url = reader.result; 
 		}
-    console.log(this.url)
+
+		console.log(this.createAccount.get('picture')!.value)
 	}
   
   clearFile(){
     this.profilePic.nativeElement.value = "";
     this.url = ""
-  }
+	this.createAccount.get('picture')?.reset() 
+ }
 
   passwordMatch(){
 	let password = this.createAccount.get('password')!.value;
 	let confirm_password = this.createAccount.get('confirm_password')!.value;
 	if (password != '' && confirm_password != ''){
 		if (password != confirm_password){
-			this.match = false
+			this.msg = "Passwords do not match!"
+			this.invalid = true
 		} else {
-			this.match = true
+			this.msg = ""
+			this.invalid = false
 		}
 	}else {
-		this.match = true
+		this.msg = ""
+		this.invalid = false
 	}
 
   }

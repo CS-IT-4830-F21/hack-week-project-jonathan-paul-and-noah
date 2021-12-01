@@ -2,35 +2,67 @@
 
 <form [formGroup]="createAccount">
     <div class="form-row">
+      
+      <!-- Username -->
       <div class="form-group col-md-6">
         <label for="username">Username</label>
+        <span class="red" *ngIf="createAccount.get('username')!.errors && createAccount.get('username')!.hasError('required')">
+          *
+        </span>
         <input type="text" class="form-control" formControlName="username" id="username" placeholder="Username">
+        <div class="text-danger" *ngIf="createAccount.get('username')?.invalid && 
+          createAccount.get('username')?.errors && 
+          (createAccount.get('username')?.dirty || createAccount.get('username')?.touched)">
+          
+          <div *ngIf="createAccount.get('username')?.hasError('minlength') || createAccount.get('username')?.hasError('maxlength')">Username must contain 6-16 characters.</div> 
+        </div>
       </div>
       
+      <!-- Email -->
       <div class="form-group col-md-6">
         <label for="email">Email</label>
+        <span class="red" *ngIf="createAccount.get('email')!.errors && createAccount.get('email')!.hasError('required')">
+          *
+        </span>
         <input 
           type="email" 
           class="form-control" 
           formControlName="email" 
           id="email" 
           placeholder="Email">
+        <div class="text-danger" *ngIf="createAccount.get('email')?.invalid && 
+          createAccount.get('email')?.errors && 
+          (createAccount.get('email')?.dirty || createAccount.get('email')?.touched)">
+          <div *ngIf="createAccount.get('email')?.hasError('pattern')">
+            Invalid email format (Example: johndoe@example.com)
+          </div>
+        </div>
       </div>
     </div>
     <div class="form-row">
-        
+  
+        <!-- Password -->
         <div class="form-group col-md-6">
           <label for="password">Password</label>
+          <span class="red" *ngIf="createAccount.get('password')!.errors && createAccount.get('password')!.hasError('required')">
+            *
+          </span>
           <input type="password" (change)="passwordMatch()" class="form-control" formControlName="password" id="password" placeholder="Password">
         </div>
+
+        <!-- Confirm password -->
         <div class="form-group col-md-6">
             <label for="confirm-password">Confirm Password</label>
+            <span class="red" *ngIf="createAccount.get('confirm_password')!.errors && createAccount.get('confirm_password')!.hasError('required')">
+              *
+            </span>
             <input (change)="passwordMatch()" type="password" class="form-control" formControlName="confirm_password" id="confirm-password" placeholder="Confirm Password">
         </div>
     </div>
     <div class="form-row">
         <div class="col-md-6">
           
+          <!-- Profile Picture -->
           <label for="profile-picture"><p class="btn btn-dark uploadText">Profile Picture<span class="material-icons">
               file_upload
               </span></p></label>
@@ -38,11 +70,13 @@
           <span *ngIf="url" id="close" class="material-icons" (click)="clearFile()">close</span>
           <img id="pfpPreview" [src]="url" *ngIf="url">
         </div>
+
+        <!-- Submit -->
         <div class="col-md-6">
-          <button type="submit" [disabled]="!createAccount.valid || match==false" class="btn btn-dark submit">Create Account</button>
+          <button type="submit" [disabled]="!createAccount.valid || invalid==true" class="btn btn-dark submit">Create Account</button>
         </div>
     </div>
-    <div class="error-message" *ngIf="match==false">
-      Passwords do not match!
+    <div class="error-message" *ngIf="invalid">
+      {{msg}}
     </div>
   </form>
