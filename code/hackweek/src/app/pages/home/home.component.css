@@ -15,7 +15,6 @@
 .feed {
     overflow: auto;
     padding: 20px;
-
 }
 
 .feed-title {
@@ -120,4 +119,11 @@
 
 .code p {
     color: rgba(0, 0, 0, 0.4);
+}
+
+code {
+    font-size: 0.8em;
+}
+pre {
+    padding: 10px;
 }
