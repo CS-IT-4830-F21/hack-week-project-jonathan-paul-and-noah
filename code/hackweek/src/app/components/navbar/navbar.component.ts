@@ -25,7 +25,7 @@ export class NavbarComponent implements OnInit {
     this.router = router;
     this.postModel.getPosts();
     if (localStorage.getItem("access_token") != null){
-      this.userId =  (this.userModel.currentUser as User).id;
+      this.userId =  9; //(this.userModel.currentUser as User).id;
     }
     else {
       this.userId = 1;
