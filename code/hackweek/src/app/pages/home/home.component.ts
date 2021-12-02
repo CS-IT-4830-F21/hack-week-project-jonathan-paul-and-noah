@@ -24,12 +24,12 @@ export class HomeComponent implements OnInit, AfterViewChecked {
   posts: Post[] | null;
   authors: string[];
 
-  sampleCode = "print(\"Here is some sample code.\")\nfor i in range(5):\n\tprint(\"Hello.\")"
-  sampleImage = "../../../assets/pic.JPG"
-  sampleUsername = "paulhemingway123"
-  sampleTitle = "Print statements and For loops!"
-  sampleDescription = "In this code, I first print 'Here is some sample code.' Then, I use a for loop to print 'Hello.' 5 times."
-  sampleTime = "44m"
+  // sampleCode = "print(\"Here is some sample code.\")\nfor i in range(5):\n\tprint(\"Hello.\")"
+  // sampleImage = "../../../assets/pic.JPG"
+  // sampleUsername = "paulhemingway123"
+  // sampleTitle = "Print statements and For loops!"
+  // sampleDescription = "In this code, I first print 'Here is some sample code.' Then, I use a for loop to print 'Hello.' 5 times."
+  // sampleTime = "44m"
 
 
   constructor( router: Router, 
