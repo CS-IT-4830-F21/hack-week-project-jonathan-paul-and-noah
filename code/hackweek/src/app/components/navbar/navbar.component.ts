@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService, User } from 'src/app/services/auth.service';
 import { PostServiceService } from 'src/app/services/post-service.service';
 
 @Component({
@@ -17,12 +17,19 @@ export class NavbarComponent implements OnInit {
   userModel: AuthService;
   router: Router;
   renderer: Renderer2;
+  userId: number;
   constructor(http: HttpClient, router: Router, builder: FormBuilder, renderer: Renderer2, userModel: AuthService, postModel: PostServiceService) {
     this.userModel = userModel;
     this.postModel = postModel;
     this.renderer = renderer;
     this.router = router;
     this.postModel.getPosts();
+    if (localStorage.getItem("access_token") != null){
+      this.userId =  (this.userModel.currentUser as User).id;
+    }
+    else {
+      this.userId = 1;
+    }
   }
 
   @ViewChild('login', {static: true}) login!: ElementRef<HTMLElement>;
@@ -50,6 +57,7 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/home']);
     this.signInForm.reset();
     this.loggedIn = true;
+    this.userId = this.userModel.currentUser?.id as number;
     
     // if (localStorage.getItem('access_token') != null && localStorage.getItem('username') == username) this.loggedIn = true;
     // if (this.userModel.signIn(username, password) == true){
