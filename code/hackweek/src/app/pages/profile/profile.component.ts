@@ -42,6 +42,8 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.posts = this.postModel.userPosts;
+    this.author.username = this.postModel.profileName;
     // console.log(888);
     // if (this.userModel.isSignedIn()){
     //   this.currentUser = this.userModel.currentUser as User;

@@ -67,7 +67,11 @@ export class HomeComponent implements OnInit
         this.highlighted = true;
       }
     }, 50)
-    
+   }
+
+   getUserPosts(id: number, username: string){
+     this.postModel.getUserPosts(id);
+     this.postModel.profileName = username;
    }
 
   

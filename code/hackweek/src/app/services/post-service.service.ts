@@ -9,7 +9,9 @@ import { AuthService, User } from './auth.service';
 })
 export class PostServiceService {
   posts: Post[];
+  userPosts: Post[];
   authors: string[];
+  profileName: string = "";
   endpoint: string = 'http://18.224.23.71:8080';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   userModel: AuthService;
@@ -17,6 +19,7 @@ export class PostServiceService {
   constructor(private http: HttpClient, public router: Router, userModel: AuthService) {
     this.userModel = userModel;
     this.posts = [];
+    this.userPosts = [];
     this.authors = [];
     // console.log(this.getPost(8));
     //this.getPosts();
@@ -30,17 +33,27 @@ export class PostServiceService {
     this.headers.set("Authorization", localStorage.getItem("access_token") as string);
       this.http.get(api, { headers: this.headers }).subscribe((res) => {
         for (let i = 0; i < (res as any).length; i++){
-          this.parsePost((res as any)[i]);
+          this.parsePost(this.posts, (res as any)[i]);
         }
-        // console.log(this.posts);
         return true;
         });
   }
 
-  parsePost(post: any){
+  getUserPosts(id: number){
+    let api = `${this.endpoint}/posts/getPostsByUserId?id=${id}`;
+    this.headers.set("Authorization", localStorage.getItem("access_token") as string);
+      this.http.get(api, { headers: this.headers }).subscribe((res) => {
+        for (let i = 0; i < (res as any).length; i++){
+          this.parsePost(this.userPosts, (res as any)[i]);
+        }
+        return true;
+      });
+  }
+
+  parsePost(posts: Post[], post: any){
     // console.log(post);
     this.userModel.getUserProfileByID(post.authorId);
-    this.posts.unshift(new Post(post.authorId, post.code, post.description, post.id, post.language, post.timestamp, post.title));
+    posts.unshift(new Post(post.authorId, post.code, post.description, post.id, post.language, post.timestamp, post.title));
   }
 
   getPost(id: number){
@@ -50,7 +63,6 @@ export class PostServiceService {
         let data = new Post((res as Post).authorId, (res as Post).code, (res as Post).description, (res as Post).id, (res as Post).language, (res as Post).timestamp, (res as Post).title);
         return data;
       });
-    
   }
 
   deletePost(id: number){

@@ -8,7 +8,7 @@
                     <span  class="profileImg">{{ authors[i].charAt(0).toUpperCase() }}</span>
                     <!-- ng-style="{'background-color': jsonObj[(authors[i].charAt(0).toUpperCase())] }" -->
                 <div class="name-date-container">
-                    <span class="post-user" routerLink="profile/{{ post.authorId }}">{{  authors[i] }}</span>
+                    <span class="post-user" routerLink="profile/{{ post.authorId }}" (click)="getUserPosts(post.authorId, authors[i])">{{  authors[i] }}</span>
                     <span class="post-time">{{ post.timestamp }}</span>
                 </div>
             </div>
