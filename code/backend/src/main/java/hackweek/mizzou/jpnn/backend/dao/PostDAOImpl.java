@@ -83,4 +83,14 @@ public class PostDAOImpl implements PostDAO
 		return postsList;
 	}
 
+	@Override
+	public List<Post> getUserPosts(int id) 
+	{
+		String sql = "SELECT * FROM posts WHERE authorId=" + id;
+		
+		List<Post> postsList = jdbcTemplate.query(sql, new PostMapper());
+		
+		return postsList;
+	}
+
 }

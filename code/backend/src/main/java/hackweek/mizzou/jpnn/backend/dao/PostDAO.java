@@ -13,4 +13,6 @@ public interface PostDAO
 	public Post getPost(int id);
 	
 	public List<Post> getAllPosts();
+	
+	public List<Post> getUserPosts(int id);
 }
