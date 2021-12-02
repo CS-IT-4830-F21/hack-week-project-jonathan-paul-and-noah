@@ -73,8 +73,10 @@ export class CreateAccountComponent implements OnInit {
     let bio = this.createAccountForm.value['bio'];
 	if (password == confirm){
 		let toggle = this.userModel.signUp(username, password, email, bio);
-		this.router.navigate(['/home']);
+		
+		
 	}
+
   }
 
   url: any; 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { HttpClient, HttpHeaders, HttpErrorResponse, HttpResponse, HttpStatusCode } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse, HttpClientModule, HttpResponse, HttpStatusCode } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Post, PostServiceService } from './post-service.service';
 
@@ -26,14 +26,20 @@ export class AuthService {
     //this.signUp("noahF2", "12345", "user@gmail.com", "This is my bio.");
   }
   
-  signUp(username: string, password: string, email: string, bio: string) {
+  signUp(username: string, password: string, email: string, bio: string){
     let api = `${this.endpoint}/users/createUser`;
     let jsonObj = {username: username, password: password, email: email, bio: bio};
-    
-      this.http.post(api, jsonObj).subscribe((res) => {
-        let toggle = this.signIn(username, password);
-        return toggle;
+      this.http.post(api, jsonObj, 
+        {observe: 'response'}
+        )
+        .subscribe(res => {
+          let toggle = this.signIn(username, password);
+          return toggle
+      },
+      (error: HttpErrorResponse) => {
+        console.log(error.status)
       }); 
+      
   }
   
   signIn(user: string, pass: string) {
