@@ -23,6 +23,9 @@ export class CreatePostComponent implements OnInit {
     this.postModel = postModel;
     this.renderer = render;
     this.router = route;
+    if (localStorage.getItem("access_token") == null) {
+      this.router.navigate(['/create-account']);
+    }
   }
 
   ngOnInit(): void {
@@ -46,6 +49,7 @@ export class CreatePostComponent implements OnInit {
     let language = this.createPostForm.value['language'];
     this.postModel.savePost(title, language, description, code);
     this.createPostForm.reset();
+    this.postModel.getPosts();
     this.router.navigate(['/home']);
     // this.router.navigate
     

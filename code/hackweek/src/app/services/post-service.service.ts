@@ -2,39 +2,45 @@ import { HttpHeaders, HttpClient, HttpResponse, HttpStatusCode } from '@angular/
 import { Injectable, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 //import { time } from 'console';
-import { User } from './auth.service';
+import { AuthService, User } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostServiceService {
   posts: Post[];
+  authors: string[];
   endpoint: string = 'http://18.224.23.71:8080';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
+  userModel: AuthService;
 
-  constructor(private http: HttpClient, public router: Router) {
+  constructor(private http: HttpClient, public router: Router, userModel: AuthService) {
+    this.userModel = userModel;
     this.posts = [];
-    //console.log(this.getPost(8));
+    this.authors = [];
+    // console.log(this.getPost(8));
     //this.getPosts();
     //console.log(this.deletePost(10));
     //this.savePost("Post 00", "C#", "test test test", "console.log('test')");
   }
 
   getPosts(){
+    this.posts = [];
     let api = `${this.endpoint}/posts/getPosts`;
     this.headers.set("Authorization", localStorage.getItem("access_token") as string);
       this.http.get(api, { headers: this.headers }).subscribe((res) => {
         for (let i = 0; i < (res as any).length; i++){
           this.parsePost((res as any)[i]);
         }
-        console.log(this.posts);
+        // console.log(this.posts);
         return true;
         });
   }
 
   parsePost(post: any){
-    console.log(post);
-    this.posts.push(new Post(post.authorId, post.code, post.description, post.id, post.language, post.timestamp, post.title));
+    // console.log(post);
+    this.userModel.getUserProfileByID(post.authorId);
+    this.posts.unshift(new Post(post.authorId, post.code, post.description, post.id, post.language, post.timestamp, post.title));
   }
 
   getPost(id: number){
@@ -63,8 +69,8 @@ export class PostServiceService {
 
   savePost(title: string, language: string, description: string, code: string){
     let api = `${this.endpoint}/posts/savePost`;
-    let jsonObj = {title: title, language: language, description: description, code: code};
-    this.headers.set("Authorization", localStorage.getItem("access_token") as string);
+    let jsonObj = {title: title, description: description, language: language, code: code};
+    this.headers.append("Authorization", localStorage.getItem("access_token") as string);
     this.http.post(api, jsonObj, { headers: this.headers }).subscribe((res) => {
         console.log(res);
     });

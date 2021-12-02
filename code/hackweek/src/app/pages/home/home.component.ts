@@ -15,8 +15,10 @@ export class HomeComponent implements OnInit {
   postModel: PostServiceService;
   renderer: Renderer2;
   router: Router;
+  jsonObj = {A: "#45C3B8", B: "#48D1CC", C:"#4AC948", D:"#4A777A", E:"#4EEE94", F:"#50A6C2", G:"#7BBF6A", H:"#7EB6FF", I:"#802A2A", J:"#82CFFD", K:"#8B6969", L:"#90EE90", M:"#C76E06	", N:"#C77826", O:"#CAFF70", P:"#CC4E5C", Q:"#CC7F32", R:"#CCFFCC", S:"#CD5B45", T:"#CDB79E", U:"#CDC673", V:"#D0FAEE", W:"#D43D1A", X:"#DB2929", Y:"#EDCB62", Z:"#EED5D2"};
 
   posts: Post[] | null;
+  authors: string[];
 
   sampleCode = "print(\"Here is some sample code.\")\nfor i in range(5):\n\tprint(\"Hello.\")"
   sampleImage = "../../../assets/pic.JPG"
@@ -31,6 +33,7 @@ export class HomeComponent implements OnInit {
     this.renderer = renderer;
     this.router = router;
     this.posts = this.postModel.posts; 
+    this.authors = this.userModel.authors;
   }
 
   ngOnInit(): void {
