@@ -60,6 +60,15 @@ public class PostController
     }
     
     @CrossOrigin
+    @GetMapping(value = "/getPostsByUserId")
+    public List<Post> getPostsByUserId(@RequestParam int id)
+    {
+    	List<Post> posts = postService.getUserPosts(id);
+    	
+    	return posts;
+    }
+    
+    @CrossOrigin
     @DeleteMapping(value = "/deletePost")
     public boolean deletePost(@RequestParam int id)
     {
