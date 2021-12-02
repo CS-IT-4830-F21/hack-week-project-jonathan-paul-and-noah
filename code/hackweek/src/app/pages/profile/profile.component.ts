@@ -17,8 +17,8 @@ export class ProfileComponent implements OnInit {
   router: Router;
   route: ActivatedRoute;
   currentUser: User;
-  posts: Post[];
-  author: User;
+  posts: Post[] = [];
+  author: User = new User(0, "", "", "");;
   highlighted: boolean = false;
   highlightService: HighlightService;
 
@@ -37,17 +37,29 @@ export class ProfileComponent implements OnInit {
     //   this.author = this.userModel.getUserProfileByID(params['id']) as unknown as string;
     //   this.pageTitle = this.author + " Posts";
     // });
-    this.posts = [new Post(1, "console.log('This is a default post.');", "This is a default post.", 1, "JavaScript", "12/2/2021", "Default.js")];
-        this.author = new User(0, "DefaultUser", "default@umsystem.edu", "I am a computer science student at the University of Missorui.");
+    // this.posts = [new Post(1, "console.log('This is a default post.');", "This is a default post.", 1, "JavaScript", "12/2/2021", "Default.js")];
+        // this.author = new User(0, "DefaultUser", "default@umsystem.edu", "I am a computer science student at the University of Missorui.");
   }
 
   ngOnInit(): void {
-    this.posts = this.postModel.userPosts;
-    this.author.username = this.postModel.profileName;
-    // console.log(888);
-    // if (this.userModel.isSignedIn()){
-    //   this.currentUser = this.userModel.currentUser as User;
-    // }
+    if (this.userModel.profile != null){
+      this.posts = this.postModel.userPosts;
+      this.author = this.userModel.profile as User;
+    }
+    else {
+      this.route.params.subscribe((params: Params) => {
+        console.log(params['id']); 
+        this.postModel.getUserPosts(params['id']);
+        setTimeout(() =>{
+          this.posts = this.postModel.userPosts;
+          this.author = this.userModel.profile as User;
+        }, 500)
+        this.router.navigate(['/profile/' + params['id']]);
+        //   this.author = this.userModel.getUserProfileByID(params['id']) as unknown as string;
+        //   this.pageTitle = this.author + " Posts";
+        // });
+      });
+    }
   }
 
   ngAfterViewChecked() {

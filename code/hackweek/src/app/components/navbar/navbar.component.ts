@@ -23,7 +23,7 @@ export class NavbarComponent implements OnInit {
     this.postModel = postModel;
     this.renderer = renderer;
     this.router = router;
-    this.postModel.getPosts();
+    // this.postModel.getPosts();
     if (localStorage.getItem("access_token") != null){
       this.userId =  9; //(this.userModel.currentUser as User).id;
     }
@@ -37,9 +37,8 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.initializeForm();
-    if (this.userModel.isSignedIn() == true){
+    if (localStorage.getItem("access_token") != null){
       this.loggedIn = true;
-      //this.postModel.getPosts();
     }
   }
 
@@ -57,13 +56,20 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/home']);
     this.signInForm.reset();
     this.loggedIn = true;
-    this.userId = this.userModel.currentUser?.id as number;
+    this.userModel.setUserID(username);
     
     // if (localStorage.getItem('access_token') != null && localStorage.getItem('username') == username) this.loggedIn = true;
     // if (this.userModel.signIn(username, password) == true){
     //   console.log("777");
     //   this.signInForm.value['username'] = this.signInForm.value['password'] = "";
     // }
+  }
+
+  viewProfile(userId: number){
+    this.userModel.profile = null;
+    this.postModel.userPosts = [];
+    this.postModel.getUserPosts(userId);
+    this.userModel.setUserProfile(localStorage.getItem("username") as string);
   }
 
   logOut(){

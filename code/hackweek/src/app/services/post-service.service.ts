@@ -11,7 +11,6 @@ export class PostServiceService {
   posts: Post[];
   userPosts: Post[];
   authors: string[];
-  profileName: string = "";
   endpoint: string = 'http://18.224.23.71:8080';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   userModel: AuthService;
@@ -29,6 +28,7 @@ export class PostServiceService {
 
   getPosts(){
     this.posts = [];
+    this.userModel.authors = [];
     let api = `${this.endpoint}/posts/getPosts`;
     this.headers.set("Authorization", localStorage.getItem("access_token") as string);
       this.http.get(api, { headers: this.headers }).subscribe((res) => {
@@ -43,6 +43,7 @@ export class PostServiceService {
     let api = `${this.endpoint}/posts/getPostsByUserId?id=${id}`;
     this.headers.set("Authorization", localStorage.getItem("access_token") as string);
       this.http.get(api, { headers: this.headers }).subscribe((res) => {
+        this.userPosts = [];
         for (let i = 0; i < (res as any).length; i++){
           this.parsePost(this.userPosts, (res as any)[i]);
         }

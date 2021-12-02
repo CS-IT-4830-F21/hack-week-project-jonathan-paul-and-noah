@@ -24,8 +24,8 @@ export class HomeComponent implements OnInit
 
   highlighted: boolean = false;
 
-  posts: Post[] | null;
-  authors: string[];
+  posts: Post[] | null = [];
+  authors: string[] = [];
 
   // sampleCode = "print(\"Here is some sample code.\")\nfor i in range(5):\n\tprint(\"Hello.\")"
   // sampleImage = "../../../assets/pic.JPG"
@@ -46,18 +46,25 @@ export class HomeComponent implements OnInit
       this.postModel = postModel;
       this.renderer = renderer;
       this.router = router;
-      if (this.postModel.posts.length == 0){
-        this.posts = this.postModel.posts = [new Post(1, "console.log('This is a default post.');", "This is a default post.", 1, "JavaScript", "12/2/2021", "Default.js")];
-        this.authors = this.userModel.authors = ["DefaultUser"];
+      this.posts = this.postModel.posts; 
+      this.authors = this.userModel.authors;
+      console.log(this.userModel.authors);
+      if (this.postModel.posts.length == 0 || this.postModel.posts.length != this.userModel.authors.length){
+        this.postModel.getPosts();
+        // this.posts = this.postModel.posts = [new Post(1, "console.log('This is a default post.');", "This is a default post.", 1, "JavaScript", "12/2/2021", "Default.js")];
+        // this.authors = this.userModel.authors = ["DefaultUser"];
+        setTimeout(() =>{
+          this.posts = this.postModel.posts; 
+          this.authors = this.userModel.authors;
+        }, 50)
       } else {
+        console.log(this.postModel.posts);
         this.posts = this.postModel.posts; 
         this.authors = this.userModel.authors;
       }
   }
 
   ngOnInit(): void {
-    //this.postModel.getPosts();
-    console.log(this.posts);
   }
 
   ngAfterViewChecked() {
@@ -70,8 +77,10 @@ export class HomeComponent implements OnInit
    }
 
    getUserPosts(id: number, username: string){
+     this.userModel.profile = null;
+     this.postModel.userPosts = [];
      this.postModel.getUserPosts(id);
-     this.postModel.profileName = username;
+     this.userModel.setUserProfile(username);
    }
 
   
