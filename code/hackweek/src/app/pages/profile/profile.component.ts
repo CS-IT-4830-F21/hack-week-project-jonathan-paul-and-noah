@@ -22,13 +22,18 @@ export class ProfileComponent implements OnInit {
     this.renderer = renderer;
     this.router = router; 
     this.currentUser = this.userModel.currentUser as User;
+
+    if (localStorage.getItem("access_token") == null) {
+      this.router.navigate(['/home']);
+    }
   }
 
   ngOnInit(): void {
-    // console.log(888);
-    // if (this.userModel.isSignedIn()){
-    //   this.currentUser = this.userModel.currentUser as User;
-    // }
+    console.log(888);
+    if (this.userModel.isSignedIn()){
+      this.currentUser = this.userModel.currentUser as User;
+    }
+    console.log(this.userModel.isSignedIn())
   }
 
 }

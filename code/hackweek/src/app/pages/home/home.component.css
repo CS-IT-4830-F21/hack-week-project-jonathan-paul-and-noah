@@ -1,6 +1,6 @@
 .container-fluid {
     background-color: white;
-    height: 100vh;
+    height: auto;
 }
 
 .side-bar {
@@ -12,6 +12,7 @@
 .feed {
     overflow: auto;
     padding: 20px;
+    margin: 0 auto;
 }
 
 .feed-title {
@@ -107,4 +108,11 @@
 
 .code p {
     color: rgba(0, 0, 0, 0.4);
+}
+
+code {
+    font-size: 0.8em;
+}
+pre {
+    padding: 10px;
 }

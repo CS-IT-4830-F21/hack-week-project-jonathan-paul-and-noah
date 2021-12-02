@@ -57,8 +57,7 @@ export class HomeComponent implements OnInit, AfterViewChecked {
         this.highlightService.highlightAll();
         this.highlighted = true;
       }
-    }, 50)
-    
+    }, 500)
   }
 
   

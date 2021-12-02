@@ -1,7 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import "~prismjs/plugins/toolbar/prism-toolbar.css";
-@import "~prismjs/themes/prism-tomorrow";
+@import "../node_modules/prismjs/plugins/toolbar/prism-toolbar.css";
+@import "../node_modules/prismjs/plugins/line-numbers/prism-line-numbers.css";
+@import "../node_modules/prismjs/themes/prism-tomorrow";
 
 * {
     margin: 0;
