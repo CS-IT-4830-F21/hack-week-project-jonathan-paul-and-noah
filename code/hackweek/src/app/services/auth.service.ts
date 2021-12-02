@@ -3,17 +3,20 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse, HttpResponse, HttpStatusCode } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Post, PostServiceService } from './post-service.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  authors: string[];
   endpoint: string = 'http://18.224.23.71:8080';
   headers = new HttpHeaders().set('Content-Type', 'application/json').set('Access-Control-Allow-Origin', 'true');
   currentUser: User | null;
 
   constructor(private http: HttpClient, public router: Router) 
   { 
+    this.authors = [];
     this.currentUser = null;
     let token = localStorage.getItem("access_token");
     if (token != null){
@@ -66,11 +69,24 @@ export class AuthService {
     let api = `${this.endpoint}/users/getUserByName?username=${name}`;
     this.headers.set("Authorization", localStorage.getItem("access_token") as string);
     this.http.get(api, { headers: this.headers }).subscribe(async (res) => {
-      this.currentUser = new User((res as any).id, (res as any).username, (res as any).email, (res as any).bio);
-      console.log(this.currentUser);
-      return true;
+      this.authors.unshift((res as any).username);
+      // this.currentUser = new User((res as any).id, (res as any).username, (res as any).email, (res as any).bio);
+      // console.log(this.currentUser);
+      // return true;
       });
-      return false;
+      // return false;
+      // catchError(this.handleError)
+  }
+
+  async getUserProfileByID(id: number) 
+  {
+    let api = `${this.endpoint}/users/getUserById?id=${id}`;
+    this.headers.set("Authorization", localStorage.getItem("access_token") as string);
+    this.http.get(api, { headers: this.headers }).subscribe(async (res) => {
+      this.authors.unshift((res as any).username);
+      // return new User((res as any).id, (res as any).username, (res as any).email, (res as any).bio);
+      });
+      // return false;
       // catchError(this.handleError)
   }
 
