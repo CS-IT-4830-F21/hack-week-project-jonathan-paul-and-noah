@@ -17,6 +17,8 @@ export class CreateAccountComponent implements OnInit {
 	router: Router;
 	emailInvalid: boolean = false;
 	match: boolean = true;
+	successful = true;
+	loading = true;
   
   constructor(private render: Renderer2, private route: Router, userModel: AuthService, postModel: PostServiceService) { 
 	this.userModel = userModel;
@@ -80,8 +82,18 @@ export class CreateAccountComponent implements OnInit {
     let bio = this.createAccountForm.value['bio'];
 	if (password == confirm){
 		let toggle = this.userModel.signUp(username, password, email, bio);
-		this.router.navigate(['/home']);
 	}
+	this.loading = true
+	setTimeout(() => {
+		if (localStorage.getItem("access_token") != null) {
+			this.successful = true
+			this.router.navigate(['/home']);
+		} else {
+			this.successful = false;
+		}
+		this.loading = false;
+	}, 2000)
+
   }
 
   url: any; 

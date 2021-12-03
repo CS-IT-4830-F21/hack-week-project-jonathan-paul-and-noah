@@ -18,6 +18,10 @@ export class NavbarComponent implements OnInit {
   router: Router;
   renderer: Renderer2;
   userId: number;
+  msg: string = '';
+  loading = false;
+  username = ''
+
   constructor(http: HttpClient, router: Router, builder: FormBuilder, renderer: Renderer2, userModel: AuthService, postModel: PostServiceService) {
     this.userModel = userModel;
     this.postModel = postModel;
@@ -46,6 +50,7 @@ export class NavbarComponent implements OnInit {
     this.initializeForm();
     if (localStorage.getItem("access_token") != null){
       this.loggedIn = true;
+      this.username = localStorage.getItem('username')!
     }
   }
 
@@ -57,6 +62,7 @@ export class NavbarComponent implements OnInit {
   }
 
   async onSubmit() {
+    this.loading = true
     let username= this.signInForm.value['username'];
     let password = this.signInForm.value['password'];
     let toggle = await this.userModel.signIn(username, password);
@@ -64,11 +70,20 @@ export class NavbarComponent implements OnInit {
     this.userModel.setUserID(username);
     this.router.navigate(['/home']);
     
-    // if (localStorage.getItem('access_token') != null && localStorage.getItem('username') == username) this.loggedIn = true;
-    // if (this.userModel.signIn(username, password) == true){
-    //   console.log("777");
-    //   this.signInForm.value['username'] = this.signInForm.value['password'] = "";
-    // }
+    setTimeout(()=>{
+      if (this.userModel.isSignedIn()){
+        this.loggedIn = true;
+        this.msg = ''
+        this.userModel.setUserID(username);
+        this.router.navigate(['/home']);
+        this.loading = false;
+      } else {
+        this.msg = 'Invalid username/password.'
+        this.loading = false;
+      }
+    }, 1000)  
+  
+    
   }
 
   verifyUser(){
