@@ -28,6 +28,13 @@ export class CreateAccountComponent implements OnInit {
 
   ngOnInit(): void {
 	this.initializeForm();
+    if (localStorage.getItem("displayPrompt") != null){
+      localStorage.removeItem('displayPrompt');
+      alert("Account does not exist. Please create a new account or verify credentials.");
+    }
+	if (localStorage.getItem("loggedIn") == "true"){
+		this.router.navigate(['/home']);
+	}
   }
 
   initializeForm(): void {

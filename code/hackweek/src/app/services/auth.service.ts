@@ -44,11 +44,19 @@ export class AuthService {
     this.http.post(`${this.endpoint}/authentication/generateToken`, {username: user, password: pass})
       .subscribe((res:any) =>
       { 
+        if (res != null){
         console.log("token = " + res.token);
         localStorage.setItem('access_token', res.token);
         localStorage.setItem("username", user);
-        this.getUserProfile(user)
-        return true;
+        this.getUserProfile(user);
+        localStorage.setItem('loggedIn', 'true');
+        this.router.navigate(['/create-account']);
+        }
+        else {
+          localStorage.setItem('displayPrompt', 'yes');
+          localStorage.setItem('loggedIn', 'false');
+          this.router.navigate(['/create-account']);
+        }
       }) 
   }
 

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { AuthService, User } from 'src/app/services/auth.service';
 import { PostServiceService } from 'src/app/services/post-service.service';
 
@@ -23,7 +23,13 @@ export class NavbarComponent implements OnInit {
     this.postModel = postModel;
     this.renderer = renderer;
     this.router = router;
-    // this.postModel.getPosts();
+    
+    this.router.events.subscribe((ev)=>{
+      if (ev instanceof NavigationEnd){
+        this.verifyUser();
+      }
+    });
+
     if (localStorage.getItem("access_token") != null){
       this.userId =  9; //(this.userModel.currentUser as User).id;
     }
@@ -55,7 +61,6 @@ export class NavbarComponent implements OnInit {
     let password = this.signInForm.value['password'];
     let toggle = await this.userModel.signIn(username, password);
     this.signInForm.reset();
-    this.loggedIn = true;
     this.userModel.setUserID(username);
     this.router.navigate(['/home']);
     
@@ -64,6 +69,14 @@ export class NavbarComponent implements OnInit {
     //   console.log("777");
     //   this.signInForm.value['username'] = this.signInForm.value['password'] = "";
     // }
+  }
+
+  verifyUser(){
+    if (localStorage.getItem("loggedIn") == "true"){
+      this.loggedIn = true;
+    } else {
+      this.loggedIn = false;
+    }
   }
 
   viewProfile(userId: number){
@@ -76,6 +89,7 @@ export class NavbarComponent implements OnInit {
   logOut(){
     this.userModel.doSignOut();
     this.loggedIn = false;
+    localStorage.setItem("loggedIn", "false");
     this.router.navigate(['/create-account']);
   }
 

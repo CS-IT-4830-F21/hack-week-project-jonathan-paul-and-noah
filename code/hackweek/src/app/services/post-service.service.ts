@@ -83,6 +83,7 @@ export class PostServiceService {
   savePost(title: string, language: string, description: string, code: string){
     let api = `${this.endpoint}/posts/savePost`;
     let jsonObj = {title: title, description: description, language: language, code: code};
+    // let jsonObj = `{title: ${title}, description: ${description}, language: ${language}, code: ${code}}`;
     this.headers.append("Authorization", localStorage.getItem("access_token") as string);
     this.http.post(api, jsonObj, { headers: this.headers }).subscribe((res) => {
         console.log(res);
