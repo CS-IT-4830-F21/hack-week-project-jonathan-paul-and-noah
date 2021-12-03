@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "../node_modules/prismjs/plugins/toolbar/prism-toolbar.css";
-@import "../node_modules/prismjs/plugins/line-numbers/prism-line-numbers.css";
+/* @import "../node_modules/prismjs/plugins/line-numbers/prism-line-numbers.css"; */
 @import "../node_modules/prismjs/themes/prism-tomorrow";
 
 * {
@@ -18,11 +18,11 @@ body {
 code[class*="language-"],
 pre[class*="language-"] {
 	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-	font-size: 0.7rem; /* 1em */
+	font-size: 1rem; /* 1em */
 	text-align: left;
 	white-space: pre;
 	word-spacing: normal;
 	word-break: normal;
 	word-wrap: normal;
-	line-height: 1.5;
+	line-height: 1rem;
 }

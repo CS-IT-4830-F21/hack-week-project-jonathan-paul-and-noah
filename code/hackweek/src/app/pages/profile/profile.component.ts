@@ -77,7 +77,7 @@ export class ProfileComponent implements OnInit {
         this.highlightService.highlightAll();
         this.highlighted = true;
       }
-    }, 50)
+    }, 501)
     
    }
 
