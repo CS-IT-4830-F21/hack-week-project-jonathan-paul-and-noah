@@ -51,12 +51,10 @@ export class HomeComponent implements OnInit
       console.log(this.userModel.authors);
       if (this.postModel.posts.length == 0 || this.postModel.posts.length != this.userModel.authors.length){
         this.postModel.getPosts();
-        // this.posts = this.postModel.posts = [new Post(1, "console.log('This is a default post.');", "This is a default post.", 1, "JavaScript", "12/2/2021", "Default.js")];
-        // this.authors = this.userModel.authors = ["DefaultUser"];
         setTimeout(() =>{
           this.posts = this.postModel.posts; 
           this.authors = this.userModel.authors;
-        }, 50)
+        }, 500)
       } else {
         console.log(this.postModel.posts);
         this.posts = this.postModel.posts; 
@@ -65,6 +63,7 @@ export class HomeComponent implements OnInit
   }
 
   ngOnInit(): void {
+
   }
 
   ngAfterViewChecked() {

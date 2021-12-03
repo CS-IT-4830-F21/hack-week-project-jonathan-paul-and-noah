@@ -42,8 +42,8 @@
                     <input formControlName="password" type="password" class="form-control" id="loginPassword" placeholder="Password">
                   </div>
                   <button type="submit" class="btn btn-primary" [disabled]="!signInForm.valid">Sign in</button>
-                  <p *ngIf="msg != ''" class="text-danger">{{msg}}</p>
-                  <span class="navbar-loading" *ngIf="loading == true">Loading...</span>
+                  <!-- <p *ngIf="msg != ''" class="text-danger">{{msg}}</p>
+                  <span class="navbar-loading" *ngIf="loading == true">Loading...</span> -->
                 </form>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" routerLink="create-account">Create an account</a>
