@@ -3,6 +3,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
+    z-index: -2;
 }
 
 .loadingIcon {
@@ -63,6 +65,8 @@
 .post {
     z-index: 1;
     margin: 25px auto;
+    position: relative;
+    z-index: -1;
     background-color: white;
     width: 80%;
     padding: 30px 0;
