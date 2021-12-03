@@ -26,3 +26,18 @@ pre[class*="language-"] {
 	word-wrap: normal;
 	line-height: 1rem;
 }
+
+.container-fluid {
+	position: relative;
+	z-index: -2;
+}
+
+.loadingIcon {
+    font-family: "Poppins";
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+    color: rgb(70, 70, 70);
+    margin-top: 40px;
+}

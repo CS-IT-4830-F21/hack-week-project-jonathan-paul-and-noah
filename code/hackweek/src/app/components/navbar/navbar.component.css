@@ -11,6 +11,11 @@ img {
 .navbar {
     background-color: rgb(39, 39, 39);
     position:sticky;
+    transition: 1s ease;
+}
+
+.navbar-loading {
+    margin: 10px 10px -15px;
 }
 
 .nav-link {
@@ -32,4 +37,10 @@ img {
 #scissors {
     font-size: 1.2em;
     vertical-align: middle;
+}
+
+@media (max-width: 992px){
+    .dropdown-menu{
+        position: relative;
+    }
 }
