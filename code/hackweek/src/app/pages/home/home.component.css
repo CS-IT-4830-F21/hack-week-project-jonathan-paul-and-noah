@@ -6,7 +6,7 @@
 }
 
 .loadingIcon {
-    font-family: "Poppins";
+    font-family: "Poppins", sans-serif;
     width: 100%;
     text-align: center;
     font-size: 16px;
@@ -26,9 +26,9 @@
 }
 
 .feed-title {
-    font-family: "Poppins";
+    font-family: "Poppins", sans-serif;
     font-weight: 800;
-    color:rgb(70, 70, 70);
+    color:rgb(37, 37, 37);
     font-size: 1.4em;
     width: 80%;
     margin: 0 auto 20px;
@@ -37,7 +37,7 @@
 * {
     margin: 0;
     padding: 0;
-    font-family: arial;
+    font-family: "Poppins" sans-serif;
 }
 
 .pfp-container {
@@ -68,8 +68,9 @@
     padding: 30px 0;
     border-radius: 2px;
     transition: transform 0.5s ease;
-    box-shadow: 0px 0px 0px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.1);
     cursor:default;
+
 }
 
 .post:hover {
@@ -110,7 +111,7 @@
 
 .post-user, .post-time {
     display: block;
-    font-family: arial;
+    font-family: "Poppins", sans-serif;
 }
 
 .title-desc {

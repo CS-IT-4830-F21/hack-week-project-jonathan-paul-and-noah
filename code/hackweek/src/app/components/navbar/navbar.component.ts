@@ -18,6 +18,7 @@ export class NavbarComponent implements OnInit {
   router: Router;
   renderer: Renderer2;
   userId: number;
+  username:string = ''
   constructor(http: HttpClient, router: Router, builder: FormBuilder, renderer: Renderer2, userModel: AuthService, postModel: PostServiceService) {
     this.userModel = userModel;
     this.postModel = postModel;
@@ -40,6 +41,9 @@ export class NavbarComponent implements OnInit {
     this.initializeForm();
     if (localStorage.getItem("access_token") != null){
       this.loggedIn = true;
+      if(localStorage.getItem('username') != null){
+        this.username = localStorage.getItem('username')!
+      }
     }
   }
 
