@@ -30,6 +30,7 @@ export class ProfileComponent implements OnInit {
     this.router = router; 
     this.route = route;
     this.currentUser = this.userModel.currentUser as User;
+
     this.highlightService = highlightService;
     // this.posts = [];
     // this.author = "";
@@ -39,6 +40,9 @@ export class ProfileComponent implements OnInit {
     // });
     // this.posts = [new Post(1, "console.log('This is a default post.');", "This is a default post.", 1, "JavaScript", "12/2/2021", "Default.js")];
         // this.author = new User(0, "DefaultUser", "default@umsystem.edu", "I am a computer science student at the University of Missorui.");
+    if (localStorage.getItem("access_token") == null) {
+      this.router.navigate(['/home']);
+    }
   }
 
   ngOnInit(): void {
@@ -60,6 +64,11 @@ export class ProfileComponent implements OnInit {
         // });
       });
     }
+
+    if (this.userModel.isSignedIn()){
+      this.currentUser = this.userModel.currentUser as User;
+    }
+    console.log(this.userModel.isSignedIn())
   }
 
   ngAfterViewChecked() {

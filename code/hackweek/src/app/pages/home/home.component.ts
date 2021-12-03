@@ -73,7 +73,7 @@ export class HomeComponent implements OnInit
         this.highlightService.highlightAll();
         this.highlighted = true;
       }
-    }, 50)
+    }, 500)
    }
 
    getUserPosts(id: number, username: string){
@@ -82,6 +82,7 @@ export class HomeComponent implements OnInit
      this.postModel.getUserPosts(id);
      this.userModel.setUserProfile(username);
    }
+
 
   
 
