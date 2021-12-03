@@ -61,8 +61,8 @@
 }
 
 .post {
+    z-index: 1;
     margin: 25px auto;
-    position: relative;
     background-color: white;
     width: 80%;
     padding: 30px 0;

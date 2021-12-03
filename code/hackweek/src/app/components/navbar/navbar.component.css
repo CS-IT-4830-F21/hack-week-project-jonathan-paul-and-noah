@@ -28,3 +28,7 @@ img {
 .logout {
     display: none;
 }
+
+.dropdown-menu {
+    z-index: 1000;
+}

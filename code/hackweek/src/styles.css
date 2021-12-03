@@ -12,6 +12,7 @@
     list-style: none;
 }
 body {
+    padding-top: 56px;
     background: white;
 }
 

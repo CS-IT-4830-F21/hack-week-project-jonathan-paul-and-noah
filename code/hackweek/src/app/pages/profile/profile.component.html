@@ -18,6 +18,10 @@
         <hr>
         <p *ngIf="posts.length == 0" class="loadingIcon">This user has no posts yet</p>
         <div class="post" *ngFor="let post of posts; let i = index">
+            <div class="deleteIcon">
+                <p class="line1"></p>
+                <p class="line2"></p>
+            </div>
             <div class="user-info">
                     <span  class="profileImg">{{ author.username.charAt(0).toUpperCase() }}</span>
                     <!-- ng-style="{'background-color': jsonObj[(authors[i].charAt(0).toUpperCase())] }" -->
