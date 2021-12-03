@@ -33,7 +33,7 @@ export class PostServiceService {
     this.headers.set("Authorization", localStorage.getItem("access_token") as string);
       this.http.get(api, { headers: this.headers }).subscribe((res) => {
         for (let i = 0; i < (res as any).length; i++){
-          this.parsePost(this.posts, (res as any)[i]);
+          this.parsePost(this.posts, (res as any)[i], true);
         }
         return true;
         });
@@ -45,16 +45,16 @@ export class PostServiceService {
       this.http.get(api, { headers: this.headers }).subscribe((res) => {
         this.userPosts = [];
         for (let i = 0; i < (res as any).length; i++){
-          this.parsePost(this.userPosts, (res as any)[i]);
+          this.parsePost(this.userPosts, (res as any)[i], false);
         }
         return true;
       });
   }
 
-  parsePost(posts: Post[], post: any){
+  parsePost(postsObj: Post[], post: any, toggle: boolean){
     // console.log(post);
-    this.userModel.getUserProfileByID(post.authorId);
-    posts.unshift(new Post(post.authorId, post.code, post.description, post.id, post.language, post.timestamp, post.title));
+    if (toggle) this.userModel.getUserProfileByID(post.authorId);
+    postsObj.unshift(new Post(post.authorId, post.code, post.description, post.id, post.language, post.timestamp, post.title));
   }
 
   getPost(id: number){

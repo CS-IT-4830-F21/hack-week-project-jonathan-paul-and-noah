@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit
 
   highlighted: boolean = false;
 
-  posts: Post[] | null = [];
+  posts: Post[] = [];
   authors: string[] = [];
 
   // sampleCode = "print(\"Here is some sample code.\")\nfor i in range(5):\n\tprint(\"Hello.\")"

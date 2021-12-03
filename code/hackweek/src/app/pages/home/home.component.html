@@ -2,28 +2,29 @@
     <!-- <div class="w-25 side-bar">sidebar</div> -->
     <div class="w-75 feed">
         <h2 class="feed-title">{{ pageTitle }}</h2>
-        <div class="post" *ngFor="let post of posts; let i = index">
+        <div class="post" *ngFor="let author of authors; let i = index"> 
+        <!-- *ngFor="let post of posts; let i = index"> -->
             <div class="user-info">
                     <!-- <img src={{sampleImage}} alt="Profile Picture" class="pfp"> -->
-                    <span  class="profileImg">{{ authors[i].charAt(0).toUpperCase() }}</span>
+                    <span  class="profileImg">{{ author.charAt(0).toUpperCase() }}</span>
                     <!-- ng-style="{'background-color': jsonObj[(authors[i].charAt(0).toUpperCase())] }" -->
                 <div class="name-date-container">
-                    <span class="post-user" routerLink="profile/{{ post.authorId }}" (click)="getUserPosts(post.authorId, authors[i])">{{  authors[i] }}</span>
-                    <span class="post-time">{{ post.timestamp }}</span>
+                    <span class="post-user" routerLink="profile/{{ posts[i].authorId }}" (click)="getUserPosts(posts[i].authorId, author)">{{  author }}</span>
+                    <span class="post-time">{{ posts[i].timestamp }}</span>
                 </div>
             </div>
             <div class="title-desc">
-                <h3 class="post-title">{{ post.title }}</h3>
+                <h3 class="post-title">{{ posts[i].title }}</h3>
                 <hr>
-                <p class="description">{{ post.description }}</p>
+                <p class="description">{{ posts[i].description }}</p>
             </div>
   
             
             <div class="code">
                 <div class="line-numbers">
-                    <pre><code class="language-java">{{ post.code }}</code></pre>
+                    <pre><code class="language-java">{{ posts[i].code }}</code></pre>
                 </div>
-                <p>{{ post.language }}</p>
+                <p>{{ posts[i].language }}</p>
             </div>     
         </div>
     </div>
