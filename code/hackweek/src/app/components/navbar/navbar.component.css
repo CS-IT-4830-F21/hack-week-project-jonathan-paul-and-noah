@@ -27,3 +27,8 @@ img {
 .logout {
     display: none;
 }
+
+#scissors {
+    font-size: 1.2em;
+    vertical-align: middle;
+}
