@@ -1,6 +1,9 @@
 .container-fluid {
     background-color: white;
-    height: auto;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .side-bar {
@@ -12,7 +15,6 @@
 .feed {
     overflow: auto;
     padding: 20px;
-    margin: 0 auto;
 }
 
 .feed-title {
@@ -28,16 +30,23 @@
 }
 
 .pfp-container {
-    padding-top: 10px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
 .profileImg {
-    padding: 10px;
+    padding: 8px;
+    font-size: 18px;
+    width: 40px;
+    height: 40px;
+    text-align: center;
     background-color: rgba(0, 0, 0, 0.2);
     color: white;
-    border-radius: 100%;
-    margin-right: 16px;
-    
+    border-radius: 50%;
+    margin-right: 16px; 
 }
 
 .post {
@@ -49,6 +58,7 @@
     border-radius: 2px;
     transition: transform 0.5s ease;
     box-shadow: 0px 0px 0px 4px rgba(0, 0, 0, 0.1);
+    cursor:default;
 }
 
 .post:hover {
@@ -79,6 +89,7 @@
 
 .post-user {
     font-weight: bold;
+    cursor: pointer;
 }
 
 .post-time {

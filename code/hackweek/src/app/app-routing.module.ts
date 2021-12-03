@@ -8,7 +8,7 @@ import { CreateAccountComponent } from './pages/create-account/create-account.co
 const routes: Routes = [
   { path: '', component: HomeComponent},
   { path: 'home', component: HomeComponent},
-  { path: 'profile', component: ProfileComponent},
+  { path: 'profile/:id', component: ProfileComponent},
   { path: 'post', component: CreatePostComponent},
   { path: 'create-account', component: CreateAccountComponent},
   { path: '**', component: HomeComponent}
