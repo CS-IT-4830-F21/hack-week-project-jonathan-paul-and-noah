@@ -18,7 +18,7 @@ export class ProfileComponent implements OnInit {
   route: ActivatedRoute;
   currentUser: User;
   posts: Post[] = [];
-  author: User = new User(0, "", "", "");;
+  author: User;
   highlighted: boolean = false;
   highlightService: HighlightService;
 
@@ -30,6 +30,7 @@ export class ProfileComponent implements OnInit {
     this.router = router; 
     this.route = route;
     this.currentUser = this.userModel.currentUser as User;
+    this.author = new User(-1, "", "", "");
 
     this.highlightService = highlightService;
     // this.posts = [];
@@ -56,8 +57,9 @@ export class ProfileComponent implements OnInit {
         this.postModel.getUserPosts(params['id']);
         setTimeout(() =>{
           this.posts = this.postModel.userPosts;
+          console.log(this.userModel.profile);
           this.author = this.userModel.profile as User;
-        }, 500)
+        }, 1800)
         this.router.navigate(['/profile/' + params['id']]);
         //   this.author = this.userModel.getUserProfileByID(params['id']) as unknown as string;
         //   this.pageTitle = this.author + " Posts";
