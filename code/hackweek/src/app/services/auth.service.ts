@@ -13,15 +13,19 @@ export class AuthService {
   endpoint: string = 'http://18.224.23.71:8080';
   headers = new HttpHeaders().set('Content-Type', 'application/json').set('Access-Control-Allow-Origin', 'true');
   currentUser: User | null;
+  profile: User | null;
+  profileId: number;
 
   constructor(private http: HttpClient, public router: Router) 
   { 
     this.authors = [];
     this.currentUser = null;
+    this.profile = null;
+    this.profileId = -1;
     let token = localStorage.getItem("access_token");
-    if (token != null){
-      this.getUserProfile(localStorage.getItem("username") as string);
-    }
+    // if (token != null){
+    //   this.getUserProfile(localStorage.getItem("username") as string);
+    // }
     //this.signIn("newUser", "password");
     //this.signUp("noahF2", "12345", "user@gmail.com", "This is my bio.");
   }
@@ -75,13 +79,29 @@ export class AuthService {
     let api = `${this.endpoint}/users/getUserByName?username=${name}`;
     this.headers.set("Authorization", localStorage.getItem("access_token") as string);
     this.http.get(api, { headers: this.headers }).subscribe(async (res) => {
-      this.authors.unshift((res as any).username);
+      // this.authors.unshift((res as any).username);
       // this.currentUser = new User((res as any).id, (res as any).username, (res as any).email, (res as any).bio);
       // console.log(this.currentUser);
       // return true;
       });
       // return false;
       // catchError(this.handleError)
+  }
+
+  setUserID(name: string){
+    let api = `${this.endpoint}/users/getUserByName?username=${name}`;
+    this.headers.set("Authorization", localStorage.getItem("access_token") as string);
+    this.http.get(api, { headers: this.headers }).subscribe(async (res) => {
+      this.profileId = (res as any).id;
+      });
+  }
+
+  async setUserProfile(name: String){
+    let api = `${this.endpoint}/users/getUserByName?username=${name}`;
+    this.headers.set("Authorization", localStorage.getItem("access_token") as string);
+    this.http.get(api, { headers: this.headers }).subscribe(async (res) => {
+      this.profile = new User((res as any).id, (res as any).username, (res as any).email, (res as any).bio);
+      });
   }
 
   async getUserProfileByID(id: number) 

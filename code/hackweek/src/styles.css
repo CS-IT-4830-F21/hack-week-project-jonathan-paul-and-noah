@@ -12,7 +12,7 @@
     list-style: none;
 }
 body {
-    background-image: linear-gradient(rgb(85, 85, 85), rgb(28, 28, 28));
+    background: white;
 }
 
 code[class*="language-"],
