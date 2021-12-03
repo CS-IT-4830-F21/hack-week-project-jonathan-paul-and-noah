@@ -3,8 +3,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: relative;
-    z-index: -2;
 }
 
 .loadingIcon {
@@ -32,7 +30,7 @@
     font-weight: 800;
     color:rgb(70, 70, 70);
     font-size: 1.4em;
-    width: 80%;
+    width: 70%;
     margin: 0 auto 20px;
 }
 
@@ -64,14 +62,12 @@
 
 .post {
     margin: 25px auto;
-    position: relative;
-    z-index: -1;
     background-color: white;
-    width: 80%;
+    width: 70%;
     padding: 30px 0;
     border-radius: 2px;
-    transition: transform 0.5s ease;
-    box-shadow: 0px 0px 0px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s ease;
+    box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.1);
     cursor:default;
 }
 

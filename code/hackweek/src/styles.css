@@ -27,10 +27,6 @@ pre[class*="language-"] {
 	line-height: 1rem;
 }
 
-.container-fluid {
-	position: relative;
-	z-index: -2;
-}
 
 .loadingIcon {
     font-family: "Poppins";
