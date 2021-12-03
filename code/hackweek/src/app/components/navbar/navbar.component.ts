@@ -70,18 +70,18 @@ export class NavbarComponent implements OnInit {
     this.userModel.setUserID(username);
     this.router.navigate(['/home']);
     
-    setTimeout(()=>{
-      if (this.userModel.isSignedIn()){
-        this.loggedIn = true;
-        this.msg = ''
-        this.userModel.setUserID(username);
-        this.router.navigate(['/home']);
-        this.loading = false;
-      } else {
-        this.msg = 'Invalid username/password.'
-        this.loading = false;
-      }
-    }, 1000)  
+    // setTimeout(()=>{
+    //   if (this.userModel.isSignedIn()){
+    //     this.loggedIn = true;
+    //     this.msg = ''
+    //     this.userModel.setUserID(username);
+    //     this.router.navigate(['/home']);
+    //     this.loading = false;
+    //   } else {
+    //     this.msg = 'Invalid username/password.'
+    //     this.loading = false;
+    //   }
+    // }, 1000)  
   
     
   }

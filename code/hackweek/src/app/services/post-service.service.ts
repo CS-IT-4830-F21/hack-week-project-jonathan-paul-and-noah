@@ -1,4 +1,4 @@
-import { HttpHeaders, HttpClient, HttpResponse, HttpStatusCode } from '@angular/common/http';
+import { HttpHeaders, HttpClient, HttpResponse, HttpStatusCode, HttpErrorResponse } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 //import { time } from 'console';
@@ -27,6 +27,8 @@ export class PostServiceService {
   }
 
   getPosts(){
+    console.log(this.posts);
+    console.log(this.authors);
     this.posts = [];
     this.userModel.authors = [];
     let api = `${this.endpoint}/posts/getPosts`;
@@ -83,12 +85,38 @@ export class PostServiceService {
   savePost(title: string, language: string, description: string, code: string){
     let api = `${this.endpoint}/posts/savePost`;
     let jsonObj = {title: title, description: description, language: language, code: code};
-    // let jsonObj = `{title: ${title}, description: ${description}, language: ${language}, code: ${code}}`;
-    this.headers.append("Authorization", localStorage.getItem("access_token") as string);
-    this.http.post(api, jsonObj, { headers: this.headers }).subscribe((res) => {
-        console.log(res);
+    this.headers = new HttpHeaders({'Content-Type': 'application/json', Authorization: localStorage.getItem("access_token") as string});
+    this.http.post(api, jsonObj, {headers: this.headers}).subscribe((res) => {
+      console.log(res);
+      this.posts.unshift(new Post((res as Post).authorId, (res as Post).code, (res as Post).description, (res as Post).id, (res as Post).language, (res as Post).timestamp, (res as Post).title));
+      this.authors.unshift(localStorage.getItem("username") as string);
+      this.router.navigate(['/home']);
+      // error: (e) => console.log(e),
+      // complete: () => {
+      //   this.posts
+      //   setTimeout(() => {
+      //     this.getPosts();
+      //     this.router.navigate(['/home']);
+      //   }, 1000);
+      // }
     });
   }
+
+  // signUp(username: string, password: string, email: string, bio: string){
+  //   let api = `${this.endpoint}/users/createUser`;
+  //   let jsonObj = {username: username, password: password, email: email, bio: bio};
+  //     this.http.post(api, jsonObj, 
+  //       {observe: 'response'}
+  //       )
+  //       .subscribe(res => {
+  //         let toggle = this.signIn(username, password);
+  //         return toggle
+  //     },
+  //     (error: HttpErrorResponse) => {
+  //       console.log(error.status)
+  //     }); 
+      
+  // }
 }
 
 export class Post {

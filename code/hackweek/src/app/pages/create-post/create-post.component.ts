@@ -47,11 +47,8 @@ export class CreatePostComponent implements OnInit {
     let description = this.createPostForm.value['description'];
     let code = this.createPostForm.value['code'];
     let language = this.createPostForm.value['language'];
-    console.log(title, language, description, code);
     this.postModel.savePost(title, language, description, code);
     this.createPostForm.reset();
-    this.postModel.getPosts();
-    this.router.navigate(['/home']);
     // this.router.navigate
     
   }
