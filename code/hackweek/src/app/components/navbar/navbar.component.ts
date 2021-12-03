@@ -36,6 +36,7 @@ export class NavbarComponent implements OnInit {
   @ViewChild('logout', {static: true}) logout!: ElementRef<HTMLElement>;
 
   ngOnInit(): void {
+    if (localStorage.getItem("access_token") != null) this.userModel.setUserID(localStorage.getItem("username") as string);
     this.initializeForm();
     if (localStorage.getItem("access_token") != null){
       this.loggedIn = true;
@@ -53,10 +54,10 @@ export class NavbarComponent implements OnInit {
     let username= this.signInForm.value['username'];
     let password = this.signInForm.value['password'];
     let toggle = await this.userModel.signIn(username, password);
-    this.router.navigate(['/home']);
     this.signInForm.reset();
     this.loggedIn = true;
     this.userModel.setUserID(username);
+    this.router.navigate(['/home']);
     
     // if (localStorage.getItem('access_token') != null && localStorage.getItem('username') == username) this.loggedIn = true;
     // if (this.userModel.signIn(username, password) == true){

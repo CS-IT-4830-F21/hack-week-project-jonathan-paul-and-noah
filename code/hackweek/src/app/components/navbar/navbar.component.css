@@ -10,6 +10,7 @@ img {
 
 .navbar {
     background-color: rgb(39, 39, 39);
+    position:sticky;
 }
 
 .nav-link {

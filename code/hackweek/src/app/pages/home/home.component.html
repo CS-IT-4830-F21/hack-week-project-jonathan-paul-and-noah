@@ -2,6 +2,7 @@
     <!-- <div class="w-25 side-bar">sidebar</div> -->
     <div class="w-100 feed">
         <h2 class="feed-title">{{ pageTitle }}</h2>
+        <p class="loadingIcon" *ngIf="posts.length == 0">Loading...</p>
         <div class="post" *ngFor="let author of authors; let i = index"> 
         <!-- *ngFor="let post of posts; let i = index"> -->
             <div class="user-info">

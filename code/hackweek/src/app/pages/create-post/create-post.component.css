@@ -3,7 +3,7 @@ body {
 }
 
 .content {
-    margin: 0 16%;
+    margin: 0 16% 50px;
     background-color: white;
     padding: 20px;
     border-radius: 5px;
@@ -15,12 +15,20 @@ input[type="file"]{
 }
 
 .title {
-    text-align: center;
-    color: black;
+    font-family: "Poppins";
+    font-weight: 800;
+    color:rgb(70, 70, 70);
+    text-align: left;
+    margin-left: 18%;
     margin-top: 20px;
     font-size: 28px;
 }
 
 select, textarea, input {
     box-shadow: 0px 0px 0px 1.5px rgba(0, 0, 0, 0.1);
+}
+
+button {
+    background-color:rgb(70, 70, 70);
+    margin: 20px 0;
 }
