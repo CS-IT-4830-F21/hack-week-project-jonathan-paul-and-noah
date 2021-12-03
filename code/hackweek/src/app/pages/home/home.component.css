@@ -63,6 +63,7 @@
 }
 
 .post {
+    z-index: 1;
     margin: 25px auto;
     position: relative;
     z-index: -1;
