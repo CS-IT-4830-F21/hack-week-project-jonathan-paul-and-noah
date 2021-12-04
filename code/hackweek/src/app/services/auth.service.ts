@@ -23,11 +23,6 @@ export class AuthService {
     this.profile = null;
     this.profileId = -1;
     let token = localStorage.getItem("access_token");
-    // if (token != null){
-    //   this.getUserProfile(localStorage.getItem("username") as string);
-    // }
-    //this.signIn("newUser", "password");
-    //this.signUp("noahF2", "12345", "user@gmail.com", "This is my bio.");
   }
   
   signUp(username: string, password: string, email: string, bio: string){
@@ -51,19 +46,23 @@ export class AuthService {
       .subscribe((res:any) =>
       { 
         if (res != null){
-        console.log("token = " + res.token);
-        localStorage.setItem('access_token', res.token);
-        localStorage.setItem("username", user);
-        this.getUserProfile(user);
-        localStorage.setItem('loggedIn', 'true');
-        this.router.navigate(['/create-account']);
+          console.log("token = " + res.token);
+          localStorage.setItem('access_token', res.token);
+          localStorage.setItem("username", user);
+          this.getUserProfile(user);
+          localStorage.setItem('loggedIn', 'true');
+          this.router.navigate(['/create-account']);
         }
         else {
           localStorage.setItem('displayPrompt', 'yes');
           localStorage.setItem('loggedIn', 'false');
           this.router.navigate(['/create-account']);
         }
-      }) 
+      }, (error: any) => {
+        localStorage.setItem('displayPrompt', 'yes');
+        localStorage.setItem('loggedIn', 'false');
+        this.router.navigate(['/create-account']);
+      }); 
   }
 
   isSignedIn(): boolean {
