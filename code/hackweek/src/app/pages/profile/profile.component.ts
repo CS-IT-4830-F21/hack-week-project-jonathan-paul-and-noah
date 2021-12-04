@@ -42,7 +42,7 @@ export class ProfileComponent implements OnInit {
     // this.posts = [new Post(1, "console.log('This is a default post.');", "This is a default post.", 1, "JavaScript", "12/2/2021", "Default.js")];
         // this.author = new User(0, "DefaultUser", "default@umsystem.edu", "I am a computer science student at the University of Missorui.");
     if (localStorage.getItem("access_token") == null) {
-      this.router.navigate(['/home']);
+      this.router.navigate(['/']);
     }
   }
 

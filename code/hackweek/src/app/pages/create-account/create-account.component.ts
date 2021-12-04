@@ -35,7 +35,7 @@ export class CreateAccountComponent implements OnInit {
       alert("Account does not exist. Please create a new account or verify credentials.");
     }
 	if (localStorage.getItem("loggedIn") == "true"){
-		this.router.navigate(['/home']);
+		this.router.navigate(['/']);
 	}
   }
 
@@ -87,7 +87,7 @@ export class CreateAccountComponent implements OnInit {
 	setTimeout(() => {
 		if (localStorage.getItem("access_token") != null) {
 			this.successful = true
-			this.router.navigate(['/home']);
+			this.router.navigate(['/']);
 		} else {
 			this.successful = false;
 		}
