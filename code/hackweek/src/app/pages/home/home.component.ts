@@ -82,7 +82,8 @@ export class HomeComponent implements OnInit
      this.userModel.setUserProfile(username);
    }
 
-
-  
+   routeFromHome(){
+    localStorage.setItem("post-origin", "home");
+   }
 
 }

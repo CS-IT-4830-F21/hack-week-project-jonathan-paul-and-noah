@@ -19,6 +19,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
 import { PostServiceService } from './services/post-service.service';
 import { HighlightService } from './highlight.service';
+import { PostComponent } from './pages/post/post.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { HighlightService } from './highlight.service';
     ProfileComponent,
     CreatePostComponent,
     CreateAccountComponent,
+    PostComponent,
   ],
   imports: [
     BrowserModule,

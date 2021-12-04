@@ -14,7 +14,7 @@
                     <span class="post-time">{{ posts[i].timestamp }}</span>
                 </div>
             </div>
-            <div class="title-desc">
+            <div class="title-desc" (click)="routeFromHome()" routerLink="post/{{i}}">
                 <h3 class="post-title">{{ posts[i].title }}</h3>
                 <hr>
                 <p class="description">{{ posts[i].description }}</p>
@@ -23,7 +23,7 @@
             
             <div class="code">
                 <div>
-                    <pre class="line-numbers"><code class="language-java">{{ posts[i].code }}</code></pre>
+                    <pre class="line-numbers"><code class="" [ngClass]="'language-' + posts[i].language">{{ posts[i].code }}</code></pre>
                 </div> 
                 <p *ngIf="posts[i].language != ''">code snippet written in {{ posts[i].language }}</p>
             </div>     
