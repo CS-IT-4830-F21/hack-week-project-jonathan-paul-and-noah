@@ -1,0 +1,16 @@
+# the following 5 lines of code were taken from: https://angular.io/guide/deployment
+# they deal will navigating to the home page via the endpoints
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ /snipCode [NC,L,QSA]
+
+# If the requested resource doesn't exist, use index.html
+# RewriteRule ^ /snipCode/
+
+# the following two lines were taken from: https://stackoverflow.com/questions/43215295/how-to-remove-at-the-end-of-url-by-htaccess
+# they fix the url when navigating to the home page via the endpoints so there are no issues
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)/$ /$1 [L,R=301]
+
+RewriteRule \d$ /snipCode/
