@@ -72,12 +72,7 @@ export class PostServiceService {
     let api = `${this.endpoint}/posts/deletePost?id=${id}`;
     this.headers.set("Authorization", localStorage.getItem("access_token") as string);
       this.http.delete(api, { headers: this.headers }).subscribe((res) => {
-        if (res == true){
-          return true;
-        }
-        else {
-          return false;
-        }
+        this.getPosts();
       });
 
   }

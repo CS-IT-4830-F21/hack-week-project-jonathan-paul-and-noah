@@ -17,6 +17,7 @@ export class ProfileComponent implements OnInit {
   router: Router;
   route: ActivatedRoute;
   currentUser: User;
+  username: string;
   posts: Post[] = [];
   author: User;
   highlighted: boolean = false;
@@ -31,6 +32,7 @@ export class ProfileComponent implements OnInit {
     this.route = route;
     this.currentUser = this.userModel.currentUser as User;
     this.author = new User(-1, "", "", "");
+    this.username = "";
 
     this.highlightService = highlightService;
     // this.posts = [];
@@ -47,6 +49,7 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.username = localStorage.getItem("username")!;
     if (this.userModel.profile != null){
       this.posts = this.postModel.userPosts;
       this.author = this.userModel.profile as User;
@@ -81,6 +84,11 @@ export class ProfileComponent implements OnInit {
       }
     }, 501)
     
+   }
+
+   deletePost(postId: number, index: number){
+    this.postModel.deletePost(postId);
+    this.posts.splice(index, 1);
    }
 
 }
