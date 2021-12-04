@@ -5,12 +5,12 @@
         <p class="loadingIcon" *ngIf="posts.length == 0">Loading...</p>
         <div class="post" *ngFor="let author of authors; let i = index"> 
         <!-- *ngFor="let post of posts; let i = index"> -->
-            <div class="user-info">
+            <div class="user-info" routerLink="profile/{{ posts[i].authorId }}" (click)="getUserPosts(posts[i].authorId, author)">
                     <!-- <img src={{sampleImage}} alt="Profile Picture" class="pfp"> -->
                     <span  class="profileImg">{{ author.charAt(0).toUpperCase() }}</span>
                     <!-- ng-style="{'background-color': jsonObj[(authors[i].charAt(0).toUpperCase())] }" -->
                 <div class="name-date-container">
-                    <span class="post-user" routerLink="profile/{{ posts[i].authorId }}" (click)="getUserPosts(posts[i].authorId, author)">{{  author }}</span>
+                    <span class="post-user">{{  author }}</span>
                     <span class="post-time">{{ posts[i].timestamp }}</span>
                 </div>
             </div>

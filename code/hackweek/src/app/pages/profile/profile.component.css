@@ -34,6 +34,11 @@ pre.line-numbers {
     margin-right: 16px; 
 }
 
+div#user-info {
+    display: flex;
+}
+
+
 .profileHeader {
     display: flex;
     width: 80%;
