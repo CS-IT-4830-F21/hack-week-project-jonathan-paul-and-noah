@@ -56,10 +56,12 @@ export class ProfileComponent implements OnInit {
         console.log(params['id']); 
         this.postModel.getUserPosts(params['id']);
         setTimeout(() =>{
+          if (this.postModel.userPosts == null || this.userModel.profile == null){
+            this.router.navigate(['/']);
+          }
           this.posts = this.postModel.userPosts;
-          console.log(this.userModel.profile);
           this.author = this.userModel.profile as User;
-        }, 1800)
+        }, 2500)
         this.router.navigate(['/profile/' + params['id']]);
         //   this.author = this.userModel.getUserProfileByID(params['id']) as unknown as string;
         //   this.pageTitle = this.author + " Posts";
