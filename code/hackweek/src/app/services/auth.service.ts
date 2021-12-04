@@ -110,16 +110,13 @@ export class AuthService {
       });
   }
 
-  async getUserProfileByID(id: number) 
+  async getUserProfileByID(id: number, index: number) 
   {
     let api = `${this.endpoint}/users/getUserById?id=${id}`;
     this.headers.set("Authorization", localStorage.getItem("access_token") as string);
     this.http.get(api, { headers: this.headers }).subscribe(async (res) => {
-      this.authors.unshift((res as any).username);
-      // return new User((res as any).id, (res as any).username, (res as any).email, (res as any).bio);
+      this.authors[index] = (res as any).username;
       });
-      // return false;
-      // catchError(this.handleError)
   }
 
   getToken() 

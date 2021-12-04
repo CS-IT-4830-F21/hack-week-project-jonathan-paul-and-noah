@@ -8,6 +8,16 @@
     margin-top: 40px;
 }
 
+code {
+    color: white;
+    text-shadow: none;
+}
+pre.line-numbers {
+    border: none;
+    border-radius: 0px;
+    background-color: black;
+}
+
 #post {
     padding: 0 0 30px;
 }

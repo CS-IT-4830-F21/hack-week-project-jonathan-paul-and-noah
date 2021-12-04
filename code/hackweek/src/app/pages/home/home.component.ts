@@ -72,7 +72,7 @@ export class HomeComponent implements OnInit
         this.highlightService.highlightAll();
         this.highlighted = true;
       }
-    }, 700)
+    }, 800)
    }
 
    getUserPosts(id: number, username: string){
