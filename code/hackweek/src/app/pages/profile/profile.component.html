@@ -21,7 +21,7 @@
             <div class="deleteIcon" id="deleteIcon">
                 <img src="../../../assets/deleteIcon.png" alt="DELETE POST" *ngIf="username == author.username" (click)="deletePost(post.id, i)">
             </div>
-            <div class="user-info">
+            <div id="user-info">
                     <span  class="profileImg">{{ author.username.charAt(0).toUpperCase() }}</span>
                     <!-- ng-style="{'background-color': jsonObj[(authors[i].charAt(0).toUpperCase())] }" -->
                 <div class="name-date-container">

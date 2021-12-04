@@ -48,7 +48,6 @@ export class HomeComponent implements OnInit
       this.router = router;
       this.posts = this.postModel.posts; 
       this.authors = this.userModel.authors;
-      console.log(this.userModel.authors);
       if (this.postModel.posts.length == 0 || this.postModel.posts.length != this.userModel.authors.length){
         this.postModel.getPosts();
         setTimeout(() =>{
@@ -56,7 +55,6 @@ export class HomeComponent implements OnInit
           this.authors = this.userModel.authors;
         }, 500)
       } else {
-        console.log(this.postModel.posts);
         this.posts = this.postModel.posts; 
         this.authors = this.userModel.authors;
       }

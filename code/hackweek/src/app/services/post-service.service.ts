@@ -35,7 +35,6 @@ export class PostServiceService {
           this.userModel.authors[(res as any).length-i-1] = "";
         }
         for (let i = 0; i < (res as any).length; i++){
-          console.log((res as any).length - i - 1);
           this.parsePost(this.posts, (res as any)[i], true, (res as any).length - i - 1);
         }
         return true;
