@@ -40,7 +40,7 @@
                 <div class="line-numbers">
                     <pre><code class="language-java">{{ post.code }}</code></pre>
                 </div>
-                <p>{{ post.language }}</p>
+                <p *ngIf="post.language != ''">code snippet written in {{ post.language }}</p>
             </div>     
         </div>
     </div>
