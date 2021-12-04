@@ -117,7 +117,7 @@
 
 .title-desc {
     width: 80%;
-
+    cursor: pointer;
 }
 
 .post-title {

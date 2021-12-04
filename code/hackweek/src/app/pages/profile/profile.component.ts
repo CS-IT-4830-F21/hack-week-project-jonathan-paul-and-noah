@@ -45,7 +45,6 @@ export class ProfileComponent implements OnInit {
     }
     else {
       this.route.params.subscribe((params: Params) => {
-        console.log(params['id']); 
         this.postModel.getUserPosts(params['id']);
         setTimeout(() =>{
           if (this.postModel.userPosts == null || this.userModel.profile == null){
@@ -77,4 +76,7 @@ export class ProfileComponent implements OnInit {
     this.posts.splice(index, 1);
    }
 
+   routeFromProfile(){
+    localStorage.setItem("post-origin", "profile");
+   }
 }
