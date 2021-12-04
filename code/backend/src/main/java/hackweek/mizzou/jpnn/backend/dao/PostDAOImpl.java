@@ -1,10 +1,17 @@
 package hackweek.mizzou.jpnn.backend.dao;
 
+import java.math.BigInteger;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 
 import hackweek.mizzou.jpnn.backend.model.Post;
@@ -17,30 +24,29 @@ public class PostDAOImpl implements PostDAO
     private JdbcTemplate jdbcTemplate;
 	
 	@Override
-	public boolean savePost(Post post) 
+	public long savePost(Post post) 
 	{
-		int rows = 0;
-		if (post.getId() > 0) 
-		{
-			// update
-			String sql = "UPDATE posts SET title=?, description=?, language=?, code=?, timestamp=? WHERE id=?";
-			rows = jdbcTemplate.update(sql, post.getTitle(), post.getDescription(), post.getLanguage(), post.getCode(),
-					post.getTimestamp(), post.getId());
-		}
-		else
-		{
-			// insert
-			String sql = "INSERT INTO posts (authorId, title, description, language, code, timestamp) VALUES (?, ?, ?, ?, ?, ?)";
-			rows = jdbcTemplate.update(sql, post.getAuthorId(), post.getTitle(), post.getDescription(), post.getLanguage(),
-					post.getCode(), post.getTimestamp());
-		}
-		
-		if(rows > 0)
-		{
-			return true;
-		}
-		
-		return false;
+		// insert
+		String sql = "INSERT INTO posts (authorId, title, description, language, code, timestamp) VALUES (?, ?, ?, ?, ?, ?)";
+		KeyHolder keyHolder = new GeneratedKeyHolder();
+	    jdbcTemplate.update(new PreparedStatementCreator() 
+	    {
+	        public PreparedStatement createPreparedStatement(
+	            Connection connection) throws SQLException 
+	        {
+	                PreparedStatement ps = connection.prepareStatement(
+	                    sql, new String[] { "id" });
+	                ps.setInt(1, post.getAuthorId());
+	                ps.setString(2, post.getTitle());
+	                ps.setString(3, post.getDescription());
+	                ps.setString(4, post.getLanguage());
+	                ps.setString(5, post.getCode());
+	                ps.setString(6, post.getTimestamp());
+	                return ps;
+	            }
+	        }, keyHolder);
+	    	    
+	    return keyHolder.getKey().longValue();
 	}
 
 	@Override

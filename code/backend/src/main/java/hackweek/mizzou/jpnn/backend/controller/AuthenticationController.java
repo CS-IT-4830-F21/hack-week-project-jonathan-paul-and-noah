@@ -36,7 +36,14 @@ public class AuthenticationController
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception 
 	{
 
-		authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
+		try
+		{
+			authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
+		} 
+		catch(Exception e)
+		{
+			return new ResponseEntity(HttpStatus.CONFLICT);
+		}
 
 		final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
 

@@ -6,7 +6,7 @@ import hackweek.mizzou.jpnn.backend.model.Post;
 
 public interface PostDAO 
 {
-	public boolean savePost(Post post);
+	public long savePost(Post post);
 	
 	public boolean deletePost(int id);
 	
