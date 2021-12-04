@@ -6,7 +6,7 @@ import hackweek.mizzou.jpnn.backend.model.Post;
 
 public interface PostService 
 {
-	public boolean savePost(Post post);
+	public Post savePost(Post post);
 	
 	public boolean deletePost(int id);
 	

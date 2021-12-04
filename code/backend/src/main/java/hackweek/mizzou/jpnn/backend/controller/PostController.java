@@ -79,18 +79,15 @@ public class PostController
     
     @CrossOrigin
     @PostMapping(value = "savePost")
-    public boolean savePost(@RequestBody Post post, @RequestHeader (name="Authorization") String token)
+    public ResponseEntity<Post> savePost(@RequestBody Post post, @RequestHeader (name="Authorization") String token)
     {
     	String author = jwtTokenUtil.getUsernameFromToken(token);
+    	
     	int id = userDao.findByUsername(author).getId();
     	post.setAuthorId(id);
     	
-    	boolean saved = false;
-    	if(author != null)
-    	{
-        	saved = postService.savePost(post);
-    	}
+    	Post savedPost = postService.savePost(post);
     	
-    	return saved;
-    }
+    	return ResponseEntity.ok(savedPost);
+      }
 }

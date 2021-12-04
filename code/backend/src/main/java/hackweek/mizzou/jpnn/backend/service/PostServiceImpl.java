@@ -21,14 +21,18 @@ public class PostServiceImpl implements PostService
 	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
 	@Override
-	public boolean savePost(Post post) 
+	public Post savePost(Post post) 
 	{
 		if(post.getId() < 1)
 		{
 			post.setTimestamp(formatter.format(new Date()));			
 		}
 		
-		return postDAO.savePost(post);
+		long key = postDAO.savePost(post);
+		
+		Post savedPost = getPost((int)key);
+		
+		return savedPost;
 	}
 
 	@Override
