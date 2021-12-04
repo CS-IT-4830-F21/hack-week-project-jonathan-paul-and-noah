@@ -28,9 +28,15 @@ export class PostServiceService {
     let api = `${this.endpoint}/posts/getPosts`;
     this.headers.set("Authorization", localStorage.getItem("access_token") as string);
       this.http.get(api, { headers: this.headers }).subscribe((res) => {
+        this.posts = new Array((res as any).length);
+        this.userModel.authors = new Array((res as any).length);
         for (let i = 0; i < (res as any).length; i++){
-          console.log((res as any)[i]);
-          this.parsePost(this.posts, (res as any)[i], true);
+          this.posts[(res as any).length-i-1] = new Post(0, "", "", 0, "", "", "");
+          this.userModel.authors[(res as any).length-i-1] = "";
+        }
+        for (let i = 0; i < (res as any).length; i++){
+          console.log((res as any).length - i - 1);
+          this.parsePost(this.posts, (res as any)[i], true, (res as any).length - i - 1);
         }
         return true;
         });
@@ -42,16 +48,18 @@ export class PostServiceService {
       this.http.get(api, { headers: this.headers }).subscribe((res) => {
         this.userPosts = [];
         for (let i = 0; i < (res as any).length; i++){
-          this.parsePost(this.userPosts, (res as any)[i], false);
+          this.parsePost(this.userPosts, (res as any)[i], false, 0);
         }
         return true;
       });
   }
 
-  parsePost(postsObj: Post[], post: any, toggle: boolean){
-    // console.log(post);
-    if (toggle) this.userModel.getUserProfileByID(post.authorId);
-    postsObj.unshift(new Post(post.authorId, post.code, post.description, post.id, post.language, post.timestamp, post.title));
+  parsePost(postsObj: Post[], post: any, toggle: boolean, index: number){
+    if (toggle){
+       this.userModel.getUserProfileByID(post.authorId, index);
+       postsObj[index] = new Post(post.authorId, post.code, post.description, post.id, post.language, post.timestamp, post.title);
+    }
+    else postsObj.splice(index, 0, new Post(post.authorId, post.code, post.description, post.id, post.language, post.timestamp, post.title));
   }
 
   getPost(id: number){
