@@ -34,6 +34,10 @@ img {
     display: none;
 }
 
+.logOut {
+    cursor: pointer;
+}
+
 
 #scissors {
     font-size: 1.2em;
