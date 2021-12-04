@@ -20,21 +20,16 @@ export class PostServiceService {
     this.posts = [];
     this.userPosts = [];
     this.authors = [];
-    // console.log(this.getPost(8));
-    //this.getPosts();
-    //console.log(this.deletePost(10));
-    //this.savePost("Post 00", "C#", "test test test", "console.log('test')");
   }
 
   getPosts(){
-    console.log(this.posts);
-    console.log(this.userModel.authors);
     this.posts = [];
     this.userModel.authors = [];
     let api = `${this.endpoint}/posts/getPosts`;
     this.headers.set("Authorization", localStorage.getItem("access_token") as string);
       this.http.get(api, { headers: this.headers }).subscribe((res) => {
         for (let i = 0; i < (res as any).length; i++){
+          console.log((res as any)[i]);
           this.parsePost(this.posts, (res as any)[i], true);
         }
         return true;

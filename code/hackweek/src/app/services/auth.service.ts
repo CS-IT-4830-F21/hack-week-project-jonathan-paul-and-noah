@@ -116,10 +116,7 @@ export class AuthService {
     this.headers.set("Authorization", localStorage.getItem("access_token") as string);
     this.http.get(api, { headers: this.headers }).subscribe(async (res) => {
       this.authors.unshift((res as any).username);
-      // return new User((res as any).id, (res as any).username, (res as any).email, (res as any).bio);
       });
-      // return false;
-      // catchError(this.handleError)
   }
 
   getToken() 
