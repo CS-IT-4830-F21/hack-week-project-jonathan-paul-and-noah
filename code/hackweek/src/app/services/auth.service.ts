@@ -46,7 +46,6 @@ export class AuthService {
       .subscribe((res:any) =>
       { 
         if (res != null){
-          console.log("token = " + res.token);
           localStorage.setItem('access_token', res.token);
           localStorage.setItem("username", user);
           this.getUserProfile(user);
