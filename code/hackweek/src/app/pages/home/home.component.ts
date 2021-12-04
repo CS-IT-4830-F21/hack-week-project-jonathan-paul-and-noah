@@ -53,7 +53,7 @@ export class HomeComponent implements OnInit
         setTimeout(() =>{
           this.posts = this.postModel.posts; 
           this.authors = this.userModel.authors;
-        }, 500)
+        }, 1000)
       } else {
         this.posts = this.postModel.posts; 
         this.authors = this.userModel.authors;
@@ -70,7 +70,7 @@ export class HomeComponent implements OnInit
         this.highlightService.highlightAll();
         this.highlighted = true;
       }
-    }, 800)
+    }, 2000)
    }
 
    getUserPosts(id: number, username: string){
