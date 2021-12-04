@@ -28,7 +28,7 @@ export class PostServiceService {
 
   getPosts(){
     console.log(this.posts);
-    console.log(this.authors);
+    console.log(this.userModel.authors);
     this.posts = [];
     this.userModel.authors = [];
     let api = `${this.endpoint}/posts/getPosts`;
@@ -87,18 +87,11 @@ export class PostServiceService {
     let jsonObj = {title: title, description: description, language: language, code: code};
     this.headers = new HttpHeaders({'Content-Type': 'application/json', Authorization: localStorage.getItem("access_token") as string});
     this.http.post(api, jsonObj, {headers: this.headers}).subscribe((res) => {
-      console.log(res);
       this.posts.unshift(new Post((res as Post).authorId, (res as Post).code, (res as Post).description, (res as Post).id, (res as Post).language, (res as Post).timestamp, (res as Post).title));
-      this.authors.unshift(localStorage.getItem("username") as string);
-      this.router.navigate(['/home']);
-      // error: (e) => console.log(e),
-      // complete: () => {
-      //   this.posts
-      //   setTimeout(() => {
-      //     this.getPosts();
-      //     this.router.navigate(['/home']);
-      //   }, 1000);
-      // }
+      this.userModel.authors.unshift(localStorage.getItem("username") as string);
+      this.router.navigate(['/']);
+    }, (error)=> {
+      console.log(error);
     });
   }
 

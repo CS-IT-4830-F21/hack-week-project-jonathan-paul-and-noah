@@ -31,6 +31,7 @@ export class NavbarComponent implements OnInit {
     this.router.events.subscribe((ev)=>{
       if (ev instanceof NavigationEnd){
         this.verifyUser();
+        if (localStorage.getItem('username') != null) this.username = localStorage.getItem('username')!;
       }
     });
 
@@ -50,7 +51,7 @@ export class NavbarComponent implements OnInit {
     this.initializeForm();
     if (localStorage.getItem("access_token") != null){
       this.loggedIn = true;
-      this.username = localStorage.getItem('username')!
+      this.username = localStorage.getItem('username')!;
     }
   }
 
@@ -68,7 +69,7 @@ export class NavbarComponent implements OnInit {
     let toggle = await this.userModel.signIn(username, password);
     this.signInForm.reset();
     this.userModel.setUserID(username);
-    this.router.navigate(['/home']);
+    this.router.navigate(['/']);
     
     // setTimeout(()=>{
     //   if (this.userModel.isSignedIn()){
@@ -92,6 +93,7 @@ export class NavbarComponent implements OnInit {
     } else {
       this.loggedIn = false;
     }
+    if (localStorage.getItem('username') != null) this.username = localStorage.getItem('username')!;
   }
 
   viewProfile(userId: number){
