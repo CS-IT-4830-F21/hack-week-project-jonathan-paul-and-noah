@@ -54,9 +54,9 @@ Having a short period of time to complete this project, we did not complete ever
 - Lastly, after the improvements listed above are made, we could work on improving the overall experience: decreasing loading time, minimizing bugs, giving objects on the page effects as they appear and go away, and making other updates to make the application even more appealing to the intended audience.
 
 #### Sources
-JWT Authentication with an Angular frontend: [https://www.positronx.io/angular-jwt-user-authentication-tutorial/ ](https://www.positronx.io/angular-jwt-user-authentication-tutorial/)
-PrismJS with Angular [https://allenhwkim.medium.com/angular-syntax-highlighted-code-with-prism-4b9fce7364dd](https://allenhwkim.medium.com/angular-syntax-highlighted-code-with-prism-4b9fce7364dd)
-Hibernate vs. JDBC
+- JWT Authentication with an Angular frontend: [https://www.positronx.io/angular-jwt-user-authentication-tutorial/ ](https://www.positronx.io/angular-jwt-user-authentication-tutorial/)
+- PrismJS with Angular [https://allenhwkim.medium.com/angular-syntax-highlighted-code-with-prism-4b9fce7364dd](https://allenhwkim.medium.com/angular-syntax-highlighted-code-with-prism-4b9fce7364dd)
+- Hibernate vs. JDBC
 [https://www.geeksforgeeks.org/difference-between-jdbc-and-hibernate-in-java/](https://www.geeksforgeeks.org/difference-between-jdbc-and-hibernate-in-java/)
 
 #### Screenshots
