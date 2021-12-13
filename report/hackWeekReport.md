@@ -80,7 +80,6 @@ Having a short period of time to complete this project, we did not complete ever
 ![Screenshot](../screenshots/backend17.PNG)
 ![Screenshot](../screenshots/backend18.PNG)
 ![Screenshot](../screenshots/backend19.PNG)
-![Screenshot](../screenshots/backend20.PNG)
 ![Screenshot](../screenshots/backend21.PNG)
 ![Screenshot](../screenshots/backend22.PNG)
 ![Screenshot](../screenshots/backend23.PNG)
